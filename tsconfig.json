@@ -1,27 +1,13 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "declaration": true,
+    "outDir": "dist",
     "strict": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "resolveJsonModule": true,
-    "baseUrl": "./src",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "noEmit": true,
-    "types": [ "node" ],
-    "incremental": true,
-    "experimentalDecorators": true,
+    "skipLibCheck": true
   },
-  "include": [ "src/**/*.ts", "mikro-orm.config.ts" ],
-  "exclude": [ "node_modules", "dist" ],
-  "ts-node": {
-    "esm": true,
-    "transpileOnly": true
-  }
+  "include": ["src"]
 }
