@@ -11,3 +11,4 @@ export const LoginAuthenticationSchema = z.object({
 export const UpdateAuthenticationSchema = z.object({
     password: z.string().optional()
 });
+//# sourceMappingURL=authentication.data.js.map

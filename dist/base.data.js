@@ -10,3 +10,4 @@ export const SkipTakeSchema = z.object({
     skip: z.number().optional().transform(value => value ? Math.max(value, 0) : value),
     take: z.number().optional().transform(value => value ? Math.min(Math.max(value, 0), MaximumTakeCount) : value)
 });
+//# sourceMappingURL=base.data.js.map

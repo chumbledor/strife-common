@@ -18,3 +18,4 @@ export const UpdateAccountSchema = z.object({
     email: z.string().optional(),
     username: z.string().optional()
 });
+//# sourceMappingURL=account.data.js.map

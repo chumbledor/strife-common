@@ -18,3 +18,4 @@ export const UpdateProjectSchema = z.object({
     name: z.string().optional(),
     description: z.string().optional()
 });
+//# sourceMappingURL=project.data.js.map
