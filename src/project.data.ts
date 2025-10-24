@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { IdsSchema, SkipTakeSchema } from '../src/base.data.js';
+import { IdsSchema, SkipTakeSchema } from './base.data.js';
 import { UniqueSchema } from './unique.data.js';
 
 export const ProjectIdSchema = z.string();
