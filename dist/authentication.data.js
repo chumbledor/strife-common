@@ -3,7 +3,7 @@ export const AuthenticationSchema = z.object({
     account_id: z.string().optional(),
     accessToken: z.string().optional(),
     refreshToken: z.string().optional()
-});
+}).strip();
 export const LoginAuthenticationSchema = z.object({
     email: z.string(),
     password: z.string()

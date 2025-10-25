@@ -10,7 +10,7 @@ export const ProjectSchema = z.object({
   account_id: z.string().optional(),
   name: z.string(),
   description: z.string().optional()
-}).and(UniqueSchema);
+}).strip().and(UniqueSchema.strip());
 
 export type ProjectData = z.infer<typeof ProjectSchema>;
 

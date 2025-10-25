@@ -4,7 +4,7 @@ export const AuthenticationSchema = z.object({
   account_id: z.string().optional(),
   accessToken: z.string().optional(),
   refreshToken: z.string().optional()
-});
+}).strip();
 
 export type AuthenticationData = z.infer<typeof AuthenticationSchema>;
 

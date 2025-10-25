@@ -9,7 +9,7 @@ export type AccountIdData = z.infer<typeof AccountIdSchema>;
 export const AccountSchema = z.object({
   email: z.string(),
   username: z.string()
-}).and(UniqueSchema);
+}).strip().and(UniqueSchema.strip());
 
 export type AccountData = z.infer<typeof AccountSchema>;
 
