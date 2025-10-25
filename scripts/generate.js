@@ -13,7 +13,7 @@ const files = fs.readdirSync(srcDir)
   .filter(f => f.endsWith('.ts') && f !== 'index.ts');
 
 const exportsContent = files.map(f => {
-  const name = f.replace(/\.ts$/, '');
+  const name = f.replace(/\.ts$/, '.js');
   return `export * from './${name}';`;
 }).join('\n');
 
