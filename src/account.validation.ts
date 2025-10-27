@@ -1,15 +1,16 @@
+const EmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export function validateEmail(email: string): Error | undefined {
   const isValid = email
     .toLowerCase()
-    .match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    .match(EmailRegex);
   return isValid
     ? undefined
     : new Error("Email is invalid.");
 };
 
+const UsernameRegex = /^[a-zA-Z0-9]+$/;
 export function validateUsername(username: string): Error | undefined {
-  const regex = /^[a-zA-Z0-9]+$/;
-  const isValid = regex.test(username);
+  const isValid = UsernameRegex.test(username);
   return isValid
     ? undefined
     : new Error("Username is invalid. A username can only contain alphanumeric characters.")
