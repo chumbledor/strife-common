@@ -8,8 +8,8 @@ export function validateEmail(email) {
 }
 ;
 export function validateUsername(username) {
-    const isValid = username
-        .match(/^[a-zA-Z0-9]+$/);
+    const regex = /^[a-zA-Z0-9]+$/;
+    const isValid = regex.test(username);
     return isValid
         ? undefined
         : new Error("Username is invalid. A username can only contain alphanumeric characters.");
