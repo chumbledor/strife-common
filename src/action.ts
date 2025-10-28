@@ -5,7 +5,7 @@ export interface IAction<TArgs extends any[]> {
   remove(callback: Callback<TArgs>): void;
 }
 
-export default class Action<TArgs extends any[]> implements IAction<TArgs> {
+export class Action<TArgs extends any[]> implements IAction<TArgs> {
 
   private _callbacks = new Array<Callback<TArgs>>;
 

@@ -1,4 +1,4 @@
-export default class Action {
+export class Action {
     _callbacks = new Array;
     invoke(...args) {
         this._callbacks.forEach(callback => callback.call(undefined, ...args));
