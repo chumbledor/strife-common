@@ -5,7 +5,9 @@ export declare const AuthenticationSchema: z.ZodObject<{
         username: z.ZodString;
     }, z.core.$strip>, z.ZodObject<{
         id: z.ZodString;
-    }, z.core.$strip>>>, z.ZodTransform<string | undefined, ({
+    }, z.core.$strip>>>, z.ZodTransform<{
+        account_id?: string;
+    }, ({
         email: string;
         username: string;
     } & {

@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { AccountSchema, type AccountData } from './account.data.js';
 
 export const AuthenticationSchema = z.object({
-  account: AccountSchema.optional().transform((account: AccountData | undefined): string | undefined => account?.id ),
+  account: AccountSchema.optional().transform((account: AccountData | undefined): { account_id?: string } => ({ account_id: account?.id }) ),
   accessToken: z.string().optional()
 }).strip();
 
