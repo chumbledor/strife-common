@@ -1,6 +1,6 @@
 import { z } from 'zod';
 export declare const AuthenticationSchema: z.ZodObject<{
-    account_id: z.ZodPipe<z.ZodOptional<z.ZodIntersection<z.ZodObject<{
+    account: z.ZodPipe<z.ZodOptional<z.ZodIntersection<z.ZodObject<{
         email: z.ZodString;
         username: z.ZodString;
     }, z.core.$strip>, z.ZodObject<{
