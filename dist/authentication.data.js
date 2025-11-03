@@ -1,6 +1,7 @@
 import { z } from 'zod';
+import { AccountSchema } from './account.data';
 export const AuthenticationSchema = z.object({
-    account_id: z.string().optional(),
+    account_id: AccountSchema.optional().transform((account) => account?.id),
     accessToken: z.string().optional()
 }).strip();
 export const LoginAuthenticationSchema = z.object({
