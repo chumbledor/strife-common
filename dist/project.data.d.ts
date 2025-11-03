@@ -17,12 +17,12 @@ export type CreateProjectData = z.infer<typeof CreateProjectSchema>;
 export declare const GetProjectsSchema: z.ZodIntersection<z.ZodIntersection<z.ZodObject<{
     account_id: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
-}, z.core.$strip>, z.ZodObject<{
+}, z.core.$strip>, z.ZodOptional<z.ZodObject<{
     ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
-}, z.core.$strip>>, z.ZodObject<{
+}, z.core.$strip>>>, z.ZodOptional<z.ZodObject<{
     skip: z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>;
     take: z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>;
-}, z.core.$strip>>;
+}, z.core.$strip>>>;
 export type GetProjectsData = z.infer<typeof GetProjectsSchema>;
 export declare const UpdateProjectSchema: z.ZodObject<{
     name: z.ZodOptional<z.ZodString>;

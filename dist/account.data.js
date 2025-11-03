@@ -13,7 +13,7 @@ export const CreateAccountSchema = z.object({
 });
 export const GetAccountsSchema = z.object({
     username: z.string().optional()
-}).and(IdsSchema).and(SkipTakeSchema);
+}).and(IdsSchema.optional()).and(SkipTakeSchema.optional());
 export const UpdateAccountSchema = z.object({
     email: z.string().optional(),
     username: z.string().optional()

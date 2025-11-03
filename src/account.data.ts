@@ -23,7 +23,7 @@ export type CreateAccountData = z.infer<typeof CreateAccountSchema>;
 
 export const GetAccountsSchema = z.object({
   username: z.string().optional()
-}).and(IdsSchema).and(SkipTakeSchema);
+}).and(IdsSchema.optional()).and(SkipTakeSchema.optional());
 
 export type GetAccountsData = z.infer<typeof GetAccountsSchema>;
 
