@@ -15,6 +15,7 @@ export declare const CreateProjectSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type CreateProjectData = z.infer<typeof CreateProjectSchema>;
 export declare const GetProjectsSchema: z.ZodIntersection<z.ZodIntersection<z.ZodObject<{
+    account_id: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>, z.ZodObject<{
     ids: z.ZodOptional<z.ZodArray<z.ZodString>>;

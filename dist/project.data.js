@@ -12,6 +12,7 @@ export const CreateProjectSchema = z.object({
     description: z.string().optional()
 });
 export const GetProjectsSchema = z.object({
+    account_id: z.string().optional(),
     name: z.string().optional()
 }).and(IdsSchema).and(SkipTakeSchema);
 export const UpdateProjectSchema = z.object({

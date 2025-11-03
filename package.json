@@ -14,8 +14,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate": "node scripts/generate.js",
-    "build": "npm run generate && tsc"
+    "barrel": "node scripts/barrel.js",
+    "build": "npm run barrel && tsc"
   },
   "files": [
     "dist"

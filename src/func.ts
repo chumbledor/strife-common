@@ -1,17 +1,17 @@
-export type Callback<TArgs extends any[], TResult> = (...args: [...TArgs]) => TResult;
+export type FuncCallback<TArgs extends any[], TResult> = (...args: [...TArgs]) => TResult;
 
 export interface IFunc<TArgs extends any[], TResult> {
-  add(callback: Callback<TArgs, TResult>): void;
-  remove(callback: Callback<TArgs, TResult>): void;
+  add(callback: FuncCallback<TArgs, TResult>): void;
+  remove(callback: FuncCallback<TArgs, TResult>): void;
 }
 
 export class Func<TArgs extends any[], TResult> implements IFunc<TArgs, TResult> {
 
-  private _callbacks = new Array<Callback<TArgs, TResult>>;
+  private _callbacks = new Array<FuncCallback<TArgs, TResult>>;
 
   public invoke($this: any, ...args: [...TArgs]): TResult[] {
     return this._callbacks.map(
-      (callback: Callback<TArgs, TResult>): TResult => 
+      (callback: FuncCallback<TArgs, TResult>): TResult => 
         callback.call($this, ...args)
     )
   }
@@ -21,11 +21,11 @@ export class Func<TArgs extends any[], TResult> implements IFunc<TArgs, TResult>
       .reduce(callbackfn);
   }
   
-  public add(callback: Callback<TArgs, TResult>): void {
+  public add(callback: FuncCallback<TArgs, TResult>): void {
     this._callbacks.push(callback);
   }
 
-  public remove(callback: Callback<TArgs, TResult>): void {
+  public remove(callback: FuncCallback<TArgs, TResult>): void {
     const index = this._callbacks.indexOf(callback);
     this._callbacks.splice(index, 1);
   }

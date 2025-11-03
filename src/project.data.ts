@@ -22,6 +22,7 @@ export const CreateProjectSchema = z.object({
 export type CreateProjectData = z.infer<typeof CreateProjectSchema>;
 
 export const GetProjectsSchema = z.object({
+  account_id: z.string().optional(),
   name: z.string().optional()
 }).and(IdsSchema).and(SkipTakeSchema);
 
