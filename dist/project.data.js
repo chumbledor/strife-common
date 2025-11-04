@@ -1,10 +1,8 @@
 import { z } from 'zod';
-import { AccountSchema } from './account.data.js';
 import { IdsSchema, SkipTakeSchema } from './base.data.js';
 import { UniqueSchema } from './unique.data.js';
 export const ProjectIdSchema = z.string();
 export const ProjectSchema = z.object({
-    account: AccountSchema.optional().transform((accountData) => ({ account_id: accountData?.id })),
     name: z.string(),
     description: z.string().optional()
 }).strip().and(UniqueSchema.strip());

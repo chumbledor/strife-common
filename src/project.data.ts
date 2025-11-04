@@ -8,7 +8,6 @@ export const ProjectIdSchema = z.string();
 export type ProjectIdData = z.infer<typeof ProjectIdSchema>;
 
 export const ProjectSchema = z.object({
-  account: AccountSchema.optional().transform((accountData: AccountData | undefined): { account_id?: string } => ({ account_id: accountData?.id }) ),
   name: z.string(),
   description: z.string().optional()
 }).strip().and(UniqueSchema.strip());

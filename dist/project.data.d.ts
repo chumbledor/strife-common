@@ -2,19 +2,6 @@ import { z } from 'zod';
 export declare const ProjectIdSchema: z.ZodString;
 export type ProjectIdData = z.infer<typeof ProjectIdSchema>;
 export declare const ProjectSchema: z.ZodIntersection<z.ZodObject<{
-    account: z.ZodPipe<z.ZodOptional<z.ZodIntersection<z.ZodObject<{
-        email: z.ZodString;
-        username: z.ZodString;
-    }, z.core.$strip>, z.ZodObject<{
-        id: z.ZodString;
-    }, z.core.$strip>>>, z.ZodTransform<{
-        account_id?: string;
-    }, ({
-        email: string;
-        username: string;
-    } & {
-        id: string;
-    }) | undefined>>;
     name: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>, z.ZodObject<{

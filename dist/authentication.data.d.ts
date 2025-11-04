@@ -1,18 +1,5 @@
 import { z } from 'zod';
 export declare const AuthenticationSchema: z.ZodObject<{
-    account: z.ZodPipe<z.ZodOptional<z.ZodIntersection<z.ZodObject<{
-        email: z.ZodString;
-        username: z.ZodString;
-    }, z.core.$strip>, z.ZodObject<{
-        id: z.ZodString;
-    }, z.core.$strip>>>, z.ZodTransform<{
-        account_id?: string;
-    }, ({
-        email: string;
-        username: string;
-    } & {
-        id: string;
-    }) | undefined>>;
     accessToken: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type AuthenticationData = z.infer<typeof AuthenticationSchema>;

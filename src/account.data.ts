@@ -1,12 +1,14 @@
 import { z } from 'zod';
 import { IdsSchema, SkipTakeSchema } from './base.data.js';
 import { UniqueSchema } from './unique.data.js';
+import { AuthenticationSchema } from './authentication.data.js';
 
 export const AccountIdSchema = z.string();
 
 export type AccountIdData = z.infer<typeof AccountIdSchema>;
 
 export const AccountSchema = z.object({
+  authentication: AuthenticationSchema.optional(),
   email: z.string(),
   username: z.string(),
 }).strip().and(UniqueSchema.strip());

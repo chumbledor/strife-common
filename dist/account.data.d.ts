@@ -2,6 +2,9 @@ import { z } from 'zod';
 export declare const AccountIdSchema: z.ZodString;
 export type AccountIdData = z.infer<typeof AccountIdSchema>;
 export declare const AccountSchema: z.ZodIntersection<z.ZodObject<{
+    authentication: z.ZodOptional<z.ZodObject<{
+        accessToken: z.ZodOptional<z.ZodString>;
+    }, z.core.$strip>>;
     email: z.ZodString;
     username: z.ZodString;
 }, z.core.$strip>, z.ZodObject<{
