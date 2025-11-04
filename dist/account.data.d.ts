@@ -22,8 +22,8 @@ export declare const GetAccountsSchema: z.ZodIntersection<z.ZodIntersection<z.Zo
 }, z.core.$strip>, z.ZodOptional<z.ZodObject<{
     ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
 }, z.core.$strip>>>, z.ZodOptional<z.ZodObject<{
-    skip: z.ZodOptional<z.ZodNumber>;
-    take: z.ZodOptional<z.ZodNumber>;
+    skip: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
+    take: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
 }, z.core.$strip>>>;
 export type GetAccountsData = z.infer<typeof GetAccountsSchema>;
 export declare const UpdateAccountSchema: z.ZodObject<{
