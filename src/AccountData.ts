@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { IdsSchema, SkipTakeSchema } from './base.data.js';
-import { UniqueSchema } from './unique.data.js';
-import { AuthenticationSchema } from './authentication.data.js';
+import { IdsSchema, SkipTakeSchema } from './BaseData.js';
+import { UniqueSchema } from './UniqueData.js';
+import { AuthenticationSchema } from './AuthenticationData.js';
 
 export const AccountIdSchema = z.string();
 

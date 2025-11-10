@@ -1,7 +1,6 @@
 import { z } from 'zod';
-import { AccountSchema, type AccountData } from './account.data.js';
-import { IdsSchema, SkipTakeSchema } from './base.data.js';
-import { UniqueSchema } from './unique.data.js';
+import { IdsSchema, SkipTakeSchema } from './BaseData.js';
+import { UniqueSchema } from './UniqueData.js';
 
 export const ProjectIdSchema = z.string();
 
