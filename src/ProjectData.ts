@@ -10,7 +10,8 @@ export type ProjectIdData = z.infer<typeof ProjectIdSchema>;
 
 export const ProjectSchema = z.object({
   name: z.string(),
-  description: z.string().optional()
+  description: z.string().optional(),
+  fileSystemRootObjectId: z.string(),
 }).strip().and(UniqueSchema.strip());
 
 export type ProjectData = z.infer<typeof ProjectSchema>;
