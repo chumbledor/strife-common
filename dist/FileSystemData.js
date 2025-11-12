@@ -12,15 +12,15 @@ export const FileSystemObjectSchema = z.object({
     projectId: z.string(),
     parentId: z.string()
 });
-export const FileSystemDirectorySchema = z.object({
+export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
     childrenIds: z.string().array()
 }).and(FileSystemObjectSchema);
-export const FileSystemFileSchema = z.object({
+export const FileSystemFileSchema = FileSystemObjectSchema.extend({
     size: z.number(),
     mimeType: z.string(),
-}).and(FileSystemObjectSchema);
+});
 export const CreateFileSystemObjectSchema = z.object({
-    type: FileSystemObjectType,
+    type: z.enum(FileSystemObjectType),
     projectId: z.string(),
     parentId: z.string(),
     name: z.string()

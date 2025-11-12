@@ -19,19 +19,21 @@ export const FileSystemObjectSchema = z.object({
 
 export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
 
-export const FileSystemDirectorySchema = z.object({
+export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
   childrenIds: z.string().array()
 }).and(FileSystemObjectSchema);
 
 export type FileSystemDirectoryData = z.infer<typeof FileSystemDirectorySchema>;
 
-export const FileSystemFileSchema = z.object({
+export const FileSystemFileSchema = FileSystemObjectSchema.extend({
   size: z.number(),
   mimeType: z.string(),
-}).and(FileSystemObjectSchema);
+});
+
+export type FileSystemFileData = z.infer<typeof FileSystemFileSchema>;
 
 export const CreateFileSystemObjectSchema = z.object({
-  type: FileSystemObjectType,
+  type: z.enum(FileSystemObjectType),
   projectId: z.string(),
   parentId: z.string(),
   name: z.string()
