@@ -2,7 +2,9 @@ import { z } from 'zod';
 import { IdsSchema, SkipTakeSchema } from './BaseData.js';
 import { UniqueSchema } from './UniqueData.js';
 
-export const ProjectIdSchema = z.string();
+export const ProjectIdSchema = z.object({
+  projectId: z.string()
+});
 
 export type ProjectIdData = z.infer<typeof ProjectIdSchema>;
 

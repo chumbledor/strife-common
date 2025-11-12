@@ -1,5 +1,7 @@
 import { z } from 'zod';
-export declare const ProjectIdSchema: z.ZodString;
+export declare const ProjectIdSchema: z.ZodObject<{
+    projectId: z.ZodString;
+}, z.core.$strip>;
 export type ProjectIdData = z.infer<typeof ProjectIdSchema>;
 export declare const ProjectSchema: z.ZodIntersection<z.ZodObject<{
     name: z.ZodString;

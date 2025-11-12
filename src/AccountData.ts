@@ -3,7 +3,9 @@ import { IdsSchema, SkipTakeSchema } from './BaseData.js';
 import { UniqueSchema } from './UniqueData.js';
 import { AuthenticationSchema } from './AuthenticationData.js';
 
-export const AccountIdSchema = z.string();
+export const AccountIdSchema = z.object({
+  accountId: z.string()
+});
 
 export type AccountIdData = z.infer<typeof AccountIdSchema>;
 

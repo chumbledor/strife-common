@@ -2,7 +2,9 @@ import { z } from 'zod';
 import { IdsSchema, SkipTakeSchema } from './BaseData.js';
 import { UniqueSchema } from './UniqueData.js';
 import { AuthenticationSchema } from './AuthenticationData.js';
-export const AccountIdSchema = z.string();
+export const AccountIdSchema = z.object({
+    accountId: z.string()
+});
 export const AccountSchema = z.object({
     authentication: AuthenticationSchema.optional(),
     email: z.string(),
