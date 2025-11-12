@@ -1,5 +1,10 @@
 import { z } from 'zod';
 
+export enum FileSystemObjectType {
+  Directory,
+  File
+}
+
 export const FileSystemObjectIdSchema = z.object({
   fileSystemObjectId: z.string()
 });
@@ -10,9 +15,23 @@ export const FileSystemObjectSchema = z.object({
   id: z.string(),
   projectId: z.string(),
   parentId: z.string()
-})
+});
+
+export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
+
+export const FileSystemDirectorySchema = z.object({
+  childrenIds: z.string().array()
+}).and(FileSystemObjectSchema);
+
+export type FileSystemDirectoryData = z.infer<typeof FileSystemDirectorySchema>;
+
+export const FileSystemFileSchema = z.object({
+  size: z.number(),
+  mimeType: z.string(),
+}).and(FileSystemObjectSchema);
 
 export const CreateFileSystemObjectSchema = z.object({
+  type: FileSystemObjectType,
   projectId: z.string(),
   parentId: z.string(),
   name: z.string()
@@ -20,13 +39,16 @@ export const CreateFileSystemObjectSchema = z.object({
 
 export type CreateFileSystemObjectData = z.infer<typeof CreateFileSystemObjectSchema>;
 
-export const CreateFileSystemDirectorySchema = CreateFileSystemObjectSchema;
+export const CreateFileSystemDirectorySchema = CreateFileSystemObjectSchema.extend({
+  type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory)
+});
 
 export type CreateFileSystemDirectoryData = z.infer<typeof CreateFileSystemDirectorySchema>;
 
-export const CreateFileSystemFileSchema = z.object({
+export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
+  type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
   size: z.number(),
   mimeType: z.string()
-}).and(CreateFileSystemObjectSchema);
+});
 
 export type CreateFileSystemFileData = z.infer<typeof CreateFileSystemFileSchema>;
