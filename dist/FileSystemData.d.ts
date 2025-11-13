@@ -1,7 +1,7 @@
 import { z } from 'zod';
 export declare enum FileSystemObjectType {
-    Directory = 0,
-    File = 1
+    Directory = "directory",
+    File = "file"
 }
 export declare const FileSystemObjectIdSchema: z.ZodObject<{
     fileSystemObjectId: z.ZodString;

@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export enum FileSystemObjectType {
-  Directory,
-  File
+  Directory = 'directory',
+  File = 'file'
 }
 
 export const FileSystemObjectIdSchema = z.object({

@@ -1,8 +1,8 @@
 import { z } from 'zod';
 export var FileSystemObjectType;
 (function (FileSystemObjectType) {
-    FileSystemObjectType[FileSystemObjectType["Directory"] = 0] = "Directory";
-    FileSystemObjectType[FileSystemObjectType["File"] = 1] = "File";
+    FileSystemObjectType["Directory"] = "directory";
+    FileSystemObjectType["File"] = "file";
 })(FileSystemObjectType || (FileSystemObjectType = {}));
 export const FileSystemObjectIdSchema = z.object({
     fileSystemObjectId: z.string()
