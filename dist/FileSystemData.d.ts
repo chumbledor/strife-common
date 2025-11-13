@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import z from 'zod';
 export declare enum FileSystemObjectType {
     Directory = "directory",
     File = "file"
@@ -35,6 +35,21 @@ export declare const CreateFileSystemObjectSchema: z.ZodObject<{
     fileSystemObjectType: z.ZodEnum<typeof FileSystemObjectType>;
     name: z.ZodString;
 }, z.core.$strip>;
+export declare const FileSystemObjectUnionSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
+    id: z.ZodString;
+    projectId: z.ZodString;
+    name: z.ZodString;
+    fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
+    childrenIds: z.ZodArray<z.ZodString>;
+}, z.core.$strip>, z.ZodObject<{
+    id: z.ZodString;
+    projectId: z.ZodString;
+    name: z.ZodString;
+    fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
+    size: z.ZodNumber;
+    mimeType: z.ZodString;
+}, z.core.$strip>], "fileSystemObjectType">;
+export type FileSystemObjectUntionData = z.infer<typeof FileSystemObjectUnionSchema>;
 export type CreateFileSystemObjectData = z.infer<typeof CreateFileSystemObjectSchema>;
 export declare const CreateFileSystemDirectorySchema: z.ZodObject<{
     name: z.ZodString;

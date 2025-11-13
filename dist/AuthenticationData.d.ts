@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import z from 'zod';
 export declare const AuthenticationSchema: z.ZodObject<{
     accessToken: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;

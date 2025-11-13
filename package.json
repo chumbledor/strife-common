@@ -2,7 +2,7 @@
   "name": "@strife/common",
   "version": "1.0.0",
   "description": "",
-  "type": "module", 
+  "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

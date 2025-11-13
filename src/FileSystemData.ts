@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import z from 'zod';
 
 export enum FileSystemObjectType {
   Directory = 'directory',
@@ -39,6 +39,10 @@ export const CreateFileSystemObjectSchema = z.object({
   fileSystemObjectType: z.enum(FileSystemObjectType),
   name: z.string()
 });
+
+export const FileSystemObjectUnionSchema = z.discriminatedUnion('fileSystemObjectType', [ FileSystemDirectorySchema, FileSystemFileSchema ]);
+
+export type FileSystemObjectUntionData = z.infer<typeof FileSystemObjectUnionSchema>;
 
 export type CreateFileSystemObjectData = z.infer<typeof CreateFileSystemObjectSchema>;
 

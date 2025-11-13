@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import z from 'zod';
 export declare const ProjectIdSchema: z.ZodObject<{
     projectId: z.ZodString;
 }, z.core.$strip>;

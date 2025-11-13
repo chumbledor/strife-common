@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import z from 'zod';
 export declare const UniqueSchema: z.ZodObject<{
     id: z.ZodString;
 }, z.core.$strip>;

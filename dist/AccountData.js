@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import z from 'zod';
 import { IdsSchema, SkipTakeSchema } from './BaseData.js';
 import { UniqueSchema } from './UniqueData.js';
 import { AuthenticationSchema } from './AuthenticationData.js';
