@@ -40,9 +40,9 @@ export const CreateFileSystemObjectSchema = z.object({
   name: z.string()
 });
 
-export const FileSystemObjectUnionSchema = z.discriminatedUnion('fileSystemObjectType', [ FileSystemDirectorySchema, FileSystemFileSchema ]);
+export const AnyFileSystemObjectSchema = z.discriminatedUnion('fileSystemObjectType', [ FileSystemDirectorySchema, FileSystemFileSchema ]);
 
-export type FileSystemObjectUntionData = z.infer<typeof FileSystemObjectUnionSchema>;
+export type AnyFileSystemObjectData = z.infer<typeof AnyFileSystemObjectSchema>;
 
 export type CreateFileSystemObjectData = z.infer<typeof CreateFileSystemObjectSchema>;
 

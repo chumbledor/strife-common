@@ -35,7 +35,7 @@ export declare const CreateFileSystemObjectSchema: z.ZodObject<{
     fileSystemObjectType: z.ZodEnum<typeof FileSystemObjectType>;
     name: z.ZodString;
 }, z.core.$strip>;
-export declare const FileSystemObjectUnionSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
+export declare const AnyFileSystemObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
     id: z.ZodString;
     projectId: z.ZodString;
     name: z.ZodString;
@@ -49,7 +49,7 @@ export declare const FileSystemObjectUnionSchema: z.ZodDiscriminatedUnion<[z.Zod
     size: z.ZodNumber;
     mimeType: z.ZodString;
 }, z.core.$strip>], "fileSystemObjectType">;
-export type FileSystemObjectUntionData = z.infer<typeof FileSystemObjectUnionSchema>;
+export type AnyFileSystemObjectData = z.infer<typeof AnyFileSystemObjectSchema>;
 export type CreateFileSystemObjectData = z.infer<typeof CreateFileSystemObjectSchema>;
 export declare const CreateFileSystemDirectorySchema: z.ZodObject<{
     name: z.ZodString;
