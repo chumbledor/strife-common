@@ -16,7 +16,7 @@ export const FileSystemObjectSchema = z.object({
 export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
     fileSystemObjectType: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
     childrenIds: z.string().array()
-});
+}).strip();
 export const FileSystemFileSchema = FileSystemObjectSchema.extend({
     fileSystemObjectType: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
     size: z.number(),
