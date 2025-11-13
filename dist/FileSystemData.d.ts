@@ -8,11 +8,12 @@ export declare const FileSystemObjectIdSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type FileSystemObjectIdData = z.infer<typeof FileSystemObjectIdSchema>;
 export declare const FileSystemObjectSchema: z.ZodObject<{
-    type: z.ZodEnum<typeof FileSystemObjectType>;
+    fileSystemObjectType: z.ZodEnum<typeof FileSystemObjectType>;
     id: z.ZodString;
     projectId: z.ZodString;
 }, z.core.$strip>;
 export declare const FileSystemDirectorySchema: z.ZodObject<{
+    fileSystemObjectType: z.ZodEnum<typeof FileSystemObjectType>;
     id: z.ZodString;
     projectId: z.ZodString;
     type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
@@ -23,24 +24,24 @@ export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
 export declare const FileSystemFileSchema: z.ZodObject<{
     id: z.ZodString;
     projectId: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
+    fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
     size: z.ZodNumber;
     mimeType: z.ZodString;
 }, z.core.$strip>;
 export type FileSystemFileData = z.infer<typeof FileSystemFileSchema>;
 export declare const CreateFileSystemObjectSchema: z.ZodObject<{
-    type: z.ZodEnum<typeof FileSystemObjectType>;
+    fileSystemObjectType: z.ZodEnum<typeof FileSystemObjectType>;
     name: z.ZodString;
 }, z.core.$strip>;
 export type CreateFileSystemObjectData = z.infer<typeof CreateFileSystemObjectSchema>;
 export declare const CreateFileSystemDirectorySchema: z.ZodObject<{
     name: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
+    fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
 }, z.core.$strip>;
 export type CreateFileSystemDirectoryData = z.infer<typeof CreateFileSystemDirectorySchema>;
 export declare const CreateFileSystemFileSchema: z.ZodObject<{
     name: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
+    fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
     size: z.ZodNumber;
     mimeType: z.ZodString;
 }, z.core.$strip>;

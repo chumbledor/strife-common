@@ -8,7 +8,7 @@ export const FileSystemObjectIdSchema = z.object({
     fileSystemObjectId: z.string()
 });
 export const FileSystemObjectSchema = z.object({
-    type: z.enum(FileSystemObjectType),
+    fileSystemObjectType: z.enum(FileSystemObjectType),
     id: z.string(),
     projectId: z.string()
 }).strip();
@@ -17,19 +17,19 @@ export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
     childrenIds: z.string().array()
 });
 export const FileSystemFileSchema = FileSystemObjectSchema.extend({
-    type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
+    fileSystemObjectType: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
     size: z.number(),
     mimeType: z.string(),
 }).strip();
 export const CreateFileSystemObjectSchema = z.object({
-    type: z.enum(FileSystemObjectType),
+    fileSystemObjectType: z.enum(FileSystemObjectType),
     name: z.string()
 });
 export const CreateFileSystemDirectorySchema = CreateFileSystemObjectSchema.extend({
-    type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory)
+    fileSystemObjectType: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory)
 });
 export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
-    type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
+    fileSystemObjectType: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
     size: z.number(),
     mimeType: z.string()
 });

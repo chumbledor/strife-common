@@ -12,7 +12,7 @@ export const FileSystemObjectIdSchema = z.object({
 export type FileSystemObjectIdData = z.infer<typeof FileSystemObjectIdSchema>;
 
 export const FileSystemObjectSchema = z.object({
-  type: z.enum(FileSystemObjectType),
+  fileSystemObjectType: z.enum(FileSystemObjectType),
   id: z.string(),
   projectId: z.string()
 }).strip();
@@ -27,7 +27,7 @@ export type FileSystemDirectoryData = z.infer<typeof FileSystemDirectorySchema>;
 export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
 
 export const FileSystemFileSchema = FileSystemObjectSchema.extend({
-  type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
+  fileSystemObjectType: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
   size: z.number(),
   mimeType: z.string(),
 }).strip();
@@ -35,20 +35,20 @@ export const FileSystemFileSchema = FileSystemObjectSchema.extend({
 export type FileSystemFileData = z.infer<typeof FileSystemFileSchema>;
 
 export const CreateFileSystemObjectSchema = z.object({
-  type: z.enum(FileSystemObjectType),
+  fileSystemObjectType: z.enum(FileSystemObjectType),
   name: z.string()
 });
 
 export type CreateFileSystemObjectData = z.infer<typeof CreateFileSystemObjectSchema>;
 
 export const CreateFileSystemDirectorySchema = CreateFileSystemObjectSchema.extend({
-  type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory)
+  fileSystemObjectType: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory)
 });
 
 export type CreateFileSystemDirectoryData = z.infer<typeof CreateFileSystemDirectorySchema>;
 
 export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
-  type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
+  fileSystemObjectType: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
   size: z.number(),
   mimeType: z.string()
 });
