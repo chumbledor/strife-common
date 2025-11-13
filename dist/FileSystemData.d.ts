@@ -11,10 +11,12 @@ export declare const FileSystemObjectSchema: z.ZodObject<{
     fileSystemObjectType: z.ZodEnum<typeof FileSystemObjectType>;
     id: z.ZodString;
     projectId: z.ZodString;
+    name: z.ZodString;
 }, z.core.$strip>;
 export declare const FileSystemDirectorySchema: z.ZodObject<{
     id: z.ZodString;
     projectId: z.ZodString;
+    name: z.ZodString;
     fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
     childrenIds: z.ZodArray<z.ZodString>;
 }, z.core.$strip>;
@@ -23,6 +25,7 @@ export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
 export declare const FileSystemFileSchema: z.ZodObject<{
     id: z.ZodString;
     projectId: z.ZodString;
+    name: z.ZodString;
     fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
     size: z.ZodNumber;
     mimeType: z.ZodString;

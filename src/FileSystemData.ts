@@ -14,7 +14,8 @@ export type FileSystemObjectIdData = z.infer<typeof FileSystemObjectIdSchema>;
 export const FileSystemObjectSchema = z.object({
   fileSystemObjectType: z.enum(FileSystemObjectType),
   id: z.string(),
-  projectId: z.string()
+  projectId: z.string(),
+  name: z.string()
 }).strip();
 
 export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({

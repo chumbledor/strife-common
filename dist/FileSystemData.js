@@ -10,7 +10,8 @@ export const FileSystemObjectIdSchema = z.object({
 export const FileSystemObjectSchema = z.object({
     fileSystemObjectType: z.enum(FileSystemObjectType),
     id: z.string(),
-    projectId: z.string()
+    projectId: z.string(),
+    name: z.string()
 }).strip();
 export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
     fileSystemObjectType: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
