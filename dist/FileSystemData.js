@@ -13,7 +13,7 @@ export const FileSystemObjectSchema = z.object({
     projectId: z.string()
 }).strip();
 export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
-    type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
+    fileSystemObjectType: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
     childrenIds: z.string().array()
 });
 export const FileSystemFileSchema = FileSystemObjectSchema.extend({

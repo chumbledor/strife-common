@@ -13,10 +13,9 @@ export declare const FileSystemObjectSchema: z.ZodObject<{
     projectId: z.ZodString;
 }, z.core.$strip>;
 export declare const FileSystemDirectorySchema: z.ZodObject<{
-    fileSystemObjectType: z.ZodEnum<typeof FileSystemObjectType>;
     id: z.ZodString;
     projectId: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
+    fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
     childrenIds: z.ZodArray<z.ZodString>;
 }, z.core.$strip>;
 export type FileSystemDirectoryData = z.infer<typeof FileSystemDirectorySchema>;
