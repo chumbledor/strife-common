@@ -1,4 +1,5 @@
 import z from 'zod';
+import mongoose from 'mongoose';
 
 export enum FileSystemObjectType {
   Directory = 'directory',
@@ -14,6 +15,7 @@ export type FileSystemObjectIdData = z.infer<typeof FileSystemObjectIdSchema>;
 export const FileSystemObjectSchema = z.object({
   fileSystemObjectType: z.enum(FileSystemObjectType),
   id: z.string(),
+  parentId: z.string().optional(),
   projectId: z.string(),
   name: z.string()
 });
@@ -22,7 +24,7 @@ export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
 
 export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
   fileSystemObjectType: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
-  childrenIds: z.string().array()
+  childrenIds: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((childId: string | mongoose.Types.ObjectId): string => childId.toString()).array()
 }).strip();
 
 export type FileSystemDirectoryData = z.infer<typeof FileSystemDirectorySchema>;
