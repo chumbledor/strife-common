@@ -8,26 +8,26 @@ export declare const FileSystemObjectIdSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type FileSystemObjectIdData = z.infer<typeof FileSystemObjectIdSchema>;
 export declare const FileSystemObjectSchema: z.ZodObject<{
+    type: z.ZodEnum<typeof FileSystemObjectType>;
     id: z.ZodString;
     projectId: z.ZodString;
-    parentId: z.ZodString;
 }, z.core.$strip>;
 export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
-export declare const FileSystemDirectorySchema: z.ZodObject<{
-    id: z.ZodString;
-    projectId: z.ZodString;
-    parentId: z.ZodString;
-    childrenIds: z.ZodArray<z.ZodString>;
-}, z.core.$strip>;
-export type FileSystemDirectoryData = z.infer<typeof FileSystemDirectorySchema>;
 export declare const FileSystemFileSchema: z.ZodObject<{
     id: z.ZodString;
     projectId: z.ZodString;
-    parentId: z.ZodString;
+    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
     size: z.ZodNumber;
     mimeType: z.ZodString;
 }, z.core.$strip>;
 export type FileSystemFileData = z.infer<typeof FileSystemFileSchema>;
+export declare const FileSystemDirectorySchema: z.ZodType<{
+    type: FileSystemObjectType.Directory;
+    id: string;
+    projectId: string;
+    children: (FileSystemDirectoryData | FileSystemFileData)[];
+}>;
+export type FileSystemDirectoryData = z.infer<typeof FileSystemDirectorySchema>;
 export declare const CreateFileSystemObjectSchema: z.ZodObject<{
     type: z.ZodEnum<typeof FileSystemObjectType>;
     name: z.ZodString;
