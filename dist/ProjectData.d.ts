@@ -16,8 +16,8 @@ export declare const CreateProjectSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type CreateProjectData = z.infer<typeof CreateProjectSchema>;
 export declare const GetProjectsSchema: z.ZodObject<{
-    skip: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
-    take: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
+    skip: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
+    take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
     ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
     account_id: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;

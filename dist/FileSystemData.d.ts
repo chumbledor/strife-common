@@ -71,24 +71,24 @@ export declare const CreateFileSystemFileSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type CreateFileSystemFileData = z.infer<typeof CreateFileSystemFileSchema>;
 export declare const GetFileSystemObjectsSchema: z.ZodObject<{
-    skip: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
-    take: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
+    skip: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
+    take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
     ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
     parentId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type GetFileSystemObjectsData = z.infer<typeof GetFileSystemObjectsSchema>;
 export declare const GetFileSystemDirectoriesSchema: z.ZodObject<{
-    skip: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
-    take: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
+    skip: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
+    take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
     ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
     parentId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type GetFileSystemDirectoriesData = z.infer<typeof GetFileSystemDirectoriesSchema>;
 export declare const GetFileSystemFilesSchema: z.ZodObject<{
-    skip: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
-    take: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
+    skip: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
+    take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
     ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
     parentId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;

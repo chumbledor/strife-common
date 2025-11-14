@@ -8,7 +8,7 @@ export declare const IdsSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type IdsData = z.infer<typeof IdsSchema>;
 export declare const SkipTakeSchema: z.ZodObject<{
-    skip: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
-    take: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
+    skip: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
+    take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
 }, z.core.$strip>;
 export type SkipTakeData = z.infer<typeof SkipTakeSchema>;

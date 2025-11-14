@@ -19,8 +19,8 @@ export declare const CreateAccountSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type CreateAccountData = z.infer<typeof CreateAccountSchema>;
 export declare const GetAccountsSchema: z.ZodObject<{
-    skip: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
-    take: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
+    skip: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
+    take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
     ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
     username: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
