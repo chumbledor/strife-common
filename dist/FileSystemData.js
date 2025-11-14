@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import z from 'zod';
-import { IdsSchema, SkipTakeSchema } from './BaseData';
-import { UniqueSchema } from './UniqueData';
+import { IdsSchema, SkipTakeSchema } from './BaseData.js';
+import { UniqueSchema } from './UniqueData.js';
 export var FileSystemObjectType;
 (function (FileSystemObjectType) {
     FileSystemObjectType["Object"] = "FileSystemObjectModel";
