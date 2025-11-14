@@ -13,14 +13,14 @@ export declare const FileSystemObjectSchema: z.ZodObject<{
     id: z.ZodString;
     fileSystemObjectType: z.ZodEnum<typeof FileSystemObjectType>;
     projectId: z.ZodString;
-    parentId: z.ZodOptional<z.ZodString>;
+    parentId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     name: z.ZodString;
 }, z.core.$strip>;
 export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
 export declare const FileSystemDirectorySchema: z.ZodObject<{
     id: z.ZodString;
     projectId: z.ZodString;
-    parentId: z.ZodOptional<z.ZodString>;
+    parentId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     name: z.ZodString;
     fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
     childrenIds: z.ZodArray<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
@@ -29,7 +29,7 @@ export type FileSystemDirectoryData = z.infer<typeof FileSystemDirectorySchema>;
 export declare const FileSystemFileSchema: z.ZodObject<{
     id: z.ZodString;
     projectId: z.ZodString;
-    parentId: z.ZodOptional<z.ZodString>;
+    parentId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     name: z.ZodString;
     fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
     size: z.ZodNumber;
@@ -43,14 +43,14 @@ export declare const CreateFileSystemObjectSchema: z.ZodObject<{
 export declare const AnyFileSystemObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
     id: z.ZodString;
     projectId: z.ZodString;
-    parentId: z.ZodOptional<z.ZodString>;
+    parentId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     name: z.ZodString;
     fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
     childrenIds: z.ZodArray<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
 }, z.core.$strip>, z.ZodObject<{
     id: z.ZodString;
     projectId: z.ZodString;
-    parentId: z.ZodOptional<z.ZodString>;
+    parentId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     name: z.ZodString;
     fileSystemObjectType: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
     size: z.ZodNumber;

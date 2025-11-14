@@ -14,7 +14,7 @@ export const FileSystemObjectIdSchema = z.object({
 export const FileSystemObjectSchema = z.object({
     fileSystemObjectType: z.enum(FileSystemObjectType),
     projectId: z.string(),
-    parentId: z.string().optional(),
+    parentId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((childId) => childId.toString()).optional(),
     name: z.string(),
     ...UniqueSchema.shape
 }).strip();

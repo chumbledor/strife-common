@@ -18,7 +18,7 @@ export type FileSystemObjectIdData = z.infer<typeof FileSystemObjectIdSchema>;
 export const FileSystemObjectSchema = z.object({
   fileSystemObjectType: z.enum(FileSystemObjectType),
   projectId: z.string(),
-  parentId: z.string().optional(),
+  parentId: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((childId: string | mongoose.Types.ObjectId): string => childId.toString()).optional(),
   name: z.string(),
   ...UniqueSchema.shape
 }).strip();
