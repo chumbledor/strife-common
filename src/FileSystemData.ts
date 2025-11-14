@@ -4,7 +4,7 @@ import { IdsSchema, SkipTakeSchema } from './BaseData';
 import { UniqueSchema } from './UniqueData';
 
 export enum FileSystemObjectType {
-  None = 'FileSystemObjectModel',
+  Object = 'FileSystemObjectModel',
   Directory = 'FileSystemDirectoryModel',
   File = 'FileSystemFileModel'
 }

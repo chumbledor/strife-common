@@ -1,7 +1,7 @@
 import z from 'zod';
 import mongoose from 'mongoose';
 export declare enum FileSystemObjectType {
-    None = "FileSystemObjectModel",
+    Object = "FileSystemObjectModel",
     Directory = "FileSystemDirectoryModel",
     File = "FileSystemFileModel"
 }

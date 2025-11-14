@@ -4,7 +4,7 @@ import { IdsSchema, SkipTakeSchema } from './BaseData';
 import { UniqueSchema } from './UniqueData';
 export var FileSystemObjectType;
 (function (FileSystemObjectType) {
-    FileSystemObjectType["None"] = "FileSystemObjectModel";
+    FileSystemObjectType["Object"] = "FileSystemObjectModel";
     FileSystemObjectType["Directory"] = "FileSystemDirectoryModel";
     FileSystemObjectType["File"] = "FileSystemFileModel";
 })(FileSystemObjectType || (FileSystemObjectType = {}));
