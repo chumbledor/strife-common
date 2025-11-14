@@ -13,7 +13,8 @@ export const AccountSchema = z.object({
   authentication: AuthenticationSchema.optional(),
   email: z.string(),
   username: z.string(),
-}).strip().and(UniqueSchema.strip());
+  ...UniqueSchema.shape
+}).strip();
 
 export type AccountData = z.infer<typeof AccountSchema>;
 
@@ -26,8 +27,10 @@ export const CreateAccountSchema = z.object({
 export type CreateAccountData = z.infer<typeof CreateAccountSchema>;
 
 export const GetAccountsSchema = z.object({
-  username: z.string().optional()
-}).and(IdsSchema.optional()).and(SkipTakeSchema.optional());
+  username: z.string().optional(),
+  ...IdsSchema.shape,
+  ...SkipTakeSchema.shape
+});
 
 export type GetAccountsData = z.infer<typeof GetAccountsSchema>;
 

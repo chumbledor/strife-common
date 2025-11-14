@@ -12,7 +12,8 @@ export const ProjectSchema = z.object({
   name: z.string(),
   description: z.string().optional(),
   rootFileSystemObjectId: z.string(),
-}).strip().and(UniqueSchema.strip());
+  ...UniqueSchema.shape
+}).strip();
 
 export type ProjectData = z.infer<typeof ProjectSchema>;
 
@@ -25,8 +26,10 @@ export type CreateProjectData = z.infer<typeof CreateProjectSchema>;
 
 export const GetProjectsSchema = z.object({
   account_id: z.string().optional(),
-  name: z.string().optional()
-}).and(IdsSchema.optional()).and(SkipTakeSchema.optional());
+  name: z.string().optional(),
+  ...IdsSchema.shape,
+  ...SkipTakeSchema.shape
+});
 
 export type GetProjectsData = z.infer<typeof GetProjectsSchema>;
 

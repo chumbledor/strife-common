@@ -1,20 +1,22 @@
 import z from 'zod';
 import mongoose from 'mongoose';
 import { IdsSchema, SkipTakeSchema } from './BaseData';
+import { UniqueSchema } from './UniqueData';
 export var FileSystemObjectType;
 (function (FileSystemObjectType) {
-    FileSystemObjectType["Directory"] = "directory";
-    FileSystemObjectType["File"] = "file";
+    FileSystemObjectType["None"] = "FileSystemObjectModel";
+    FileSystemObjectType["Directory"] = "FileSystemDirectoryModel";
+    FileSystemObjectType["File"] = "FileSystemFileModel";
 })(FileSystemObjectType || (FileSystemObjectType = {}));
 export const FileSystemObjectIdSchema = z.object({
     fileSystemObjectId: z.string()
 });
 export const FileSystemObjectSchema = z.object({
     fileSystemObjectType: z.enum(FileSystemObjectType),
-    id: z.string(),
     projectId: z.string(),
     parentId: z.string().optional(),
-    name: z.string()
+    name: z.string(),
+    ...UniqueSchema.shape
 }).strip();
 export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
     fileSystemObjectType: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
@@ -40,10 +42,12 @@ export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
 });
 export const GetFileSystemObjectsSchema = z.object({
     parentId: z.string().optional(),
-    name: z.string().optional()
+    name: z.string().optional(),
+    ...IdsSchema.shape,
+    ...SkipTakeSchema.shape
 });
-export const GetFileSystemDirectoriesSchema = GetFileSystemObjectsSchema.and(IdsSchema.optional()).and(SkipTakeSchema.optional());
+export const GetFileSystemDirectoriesSchema = GetFileSystemObjectsSchema;
 export const GetFileSystemFilesSchema = GetFileSystemObjectsSchema.extend({
     mimeType: z.string().optional()
-}).and(IdsSchema.optional()).and(SkipTakeSchema.optional());
+});
 //# sourceMappingURL=FileSystemData.js.map

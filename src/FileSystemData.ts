@@ -1,10 +1,12 @@
 import z from 'zod';
 import mongoose from 'mongoose';
 import { IdsSchema, SkipTakeSchema } from './BaseData';
+import { UniqueSchema } from './UniqueData';
 
 export enum FileSystemObjectType {
-  Directory = 'directory',
-  File = 'file'
+  None = 'FileSystemObjectModel',
+  Directory = 'FileSystemDirectoryModel',
+  File = 'FileSystemFileModel'
 }
 
 export const FileSystemObjectIdSchema = z.object({
@@ -15,10 +17,10 @@ export type FileSystemObjectIdData = z.infer<typeof FileSystemObjectIdSchema>;
 
 export const FileSystemObjectSchema = z.object({
   fileSystemObjectType: z.enum(FileSystemObjectType),
-  id: z.string(),
   projectId: z.string(),
   parentId: z.string().optional(),
-  name: z.string()
+  name: z.string(),
+  ...UniqueSchema.shape
 }).strip();
 
 export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
@@ -65,17 +67,19 @@ export type CreateFileSystemFileData = z.infer<typeof CreateFileSystemFileSchema
 
 export const GetFileSystemObjectsSchema = z.object({
   parentId: z.string().optional(),
-  name: z.string().optional()
+  name: z.string().optional(),
+  ...IdsSchema.shape,
+  ...SkipTakeSchema.shape
 });
 
 export type GetFileSystemObjectsData = z.infer<typeof GetFileSystemObjectsSchema>;
 
-export const GetFileSystemDirectoriesSchema = GetFileSystemObjectsSchema.and(IdsSchema.optional()).and(SkipTakeSchema.optional());
+export const GetFileSystemDirectoriesSchema = GetFileSystemObjectsSchema;
 
 export type GetFileSystemDirectoriesData = z.infer<typeof GetFileSystemDirectoriesSchema>;
 
 export const GetFileSystemFilesSchema = GetFileSystemObjectsSchema.extend({
   mimeType: z.string().optional()
-}).and(IdsSchema.optional()).and(SkipTakeSchema.optional());
+});
 
 export type GetFileSystemFilesData = z.infer<typeof GetFileSystemFilesSchema>;

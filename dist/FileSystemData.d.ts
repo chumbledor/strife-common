@@ -1,16 +1,17 @@
 import z from 'zod';
 import mongoose from 'mongoose';
 export declare enum FileSystemObjectType {
-    Directory = "directory",
-    File = "file"
+    None = "FileSystemObjectModel",
+    Directory = "FileSystemDirectoryModel",
+    File = "FileSystemFileModel"
 }
 export declare const FileSystemObjectIdSchema: z.ZodObject<{
     fileSystemObjectId: z.ZodString;
 }, z.core.$strip>;
 export type FileSystemObjectIdData = z.infer<typeof FileSystemObjectIdSchema>;
 export declare const FileSystemObjectSchema: z.ZodObject<{
-    fileSystemObjectType: z.ZodEnum<typeof FileSystemObjectType>;
     id: z.ZodString;
+    fileSystemObjectType: z.ZodEnum<typeof FileSystemObjectType>;
     projectId: z.ZodString;
     parentId: z.ZodOptional<z.ZodString>;
     name: z.ZodString;
@@ -70,28 +71,27 @@ export declare const CreateFileSystemFileSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type CreateFileSystemFileData = z.infer<typeof CreateFileSystemFileSchema>;
 export declare const GetFileSystemObjectsSchema: z.ZodObject<{
+    skip: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
+    take: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
+    ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
     parentId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type GetFileSystemObjectsData = z.infer<typeof GetFileSystemObjectsSchema>;
-export declare const GetFileSystemDirectoriesSchema: z.ZodIntersection<z.ZodIntersection<z.ZodObject<{
-    parentId: z.ZodOptional<z.ZodString>;
-    name: z.ZodOptional<z.ZodString>;
-}, z.core.$strip>, z.ZodOptional<z.ZodObject<{
-    ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
-}, z.core.$strip>>>, z.ZodOptional<z.ZodObject<{
+export declare const GetFileSystemDirectoriesSchema: z.ZodObject<{
     skip: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
     take: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
-}, z.core.$strip>>>;
+    ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    parentId: z.ZodOptional<z.ZodString>;
+    name: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
 export type GetFileSystemDirectoriesData = z.infer<typeof GetFileSystemDirectoriesSchema>;
-export declare const GetFileSystemFilesSchema: z.ZodIntersection<z.ZodIntersection<z.ZodObject<{
+export declare const GetFileSystemFilesSchema: z.ZodObject<{
+    skip: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
+    take: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
+    ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
     parentId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
     mimeType: z.ZodOptional<z.ZodString>;
-}, z.core.$strip>, z.ZodOptional<z.ZodObject<{
-    ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
-}, z.core.$strip>>>, z.ZodOptional<z.ZodObject<{
-    skip: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
-    take: z.ZodOptional<z.ZodPipe<z.ZodOptional<z.ZodNumber>, z.ZodTransform<number | undefined, number | undefined>>>;
-}, z.core.$strip>>>;
+}, z.core.$strip>;
 export type GetFileSystemFilesData = z.infer<typeof GetFileSystemFilesSchema>;

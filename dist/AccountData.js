@@ -9,15 +9,18 @@ export const AccountSchema = z.object({
     authentication: AuthenticationSchema.optional(),
     email: z.string(),
     username: z.string(),
-}).strip().and(UniqueSchema.strip());
+    ...UniqueSchema.shape
+}).strip();
 export const CreateAccountSchema = z.object({
     email: z.string(),
     username: z.string(),
     password: z.string()
 });
 export const GetAccountsSchema = z.object({
-    username: z.string().optional()
-}).and(IdsSchema.optional()).and(SkipTakeSchema.optional());
+    username: z.string().optional(),
+    ...IdsSchema.shape,
+    ...SkipTakeSchema.shape
+});
 export const UpdateAccountSchema = z.object({
     email: z.string().optional(),
     username: z.string().optional()
