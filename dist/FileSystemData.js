@@ -12,8 +12,8 @@ export const FileSystemObjectIdSchema = z.object({
 export const FileSystemObjectSchema = z.object({
     fileSystemObjectType: z.enum(FileSystemObjectType),
     id: z.string(),
-    parentId: z.string().optional(),
     projectId: z.string(),
+    parentId: z.string().optional(),
     name: z.string()
 }).strip();
 export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
@@ -39,6 +39,7 @@ export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
     mimeType: z.string()
 });
 export const GetFileSystemObjectsSchema = z.object({
+    parentId: z.string().optional(),
     name: z.string().optional()
 });
 export const GetFileSystemDirectoriesSchema = GetFileSystemObjectsSchema.and(IdsSchema.optional()).and(SkipTakeSchema.optional());
