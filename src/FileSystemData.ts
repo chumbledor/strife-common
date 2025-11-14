@@ -16,9 +16,9 @@ export const FileSystemObjectIdSchema = z.object({
 export type FileSystemObjectIdData = z.infer<typeof FileSystemObjectIdSchema>;
 
 export const FileSystemObjectSchema = z.object({
-  fileSystemObjectType: z.enum(FileSystemObjectType),
+  type: z.enum(FileSystemObjectType),
   projectId: z.string(),
-  parentId: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((childId: string | mongoose.Types.ObjectId): string => childId.toString()).optional(),
+  parentId: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((parentId: string | mongoose.Types.ObjectId): string => parentId.toString()).optional(),
   name: z.string(),
   ...UniqueSchema.shape
 }).strip();
@@ -26,14 +26,14 @@ export const FileSystemObjectSchema = z.object({
 export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
 
 export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
-  fileSystemObjectType: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
+  type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
   childrenIds: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((childId: string | mongoose.Types.ObjectId): string => childId.toString()).array()
 }).strip();
 
 export type FileSystemDirectoryData = z.infer<typeof FileSystemDirectorySchema>;
 
 export const FileSystemFileSchema = FileSystemObjectSchema.extend({
-  fileSystemObjectType: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
+  type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
   size: z.number(),
   mimeType: z.string(),
 }).strip();
@@ -41,24 +41,24 @@ export const FileSystemFileSchema = FileSystemObjectSchema.extend({
 export type FileSystemFileData = z.infer<typeof FileSystemFileSchema>;
 
 export const CreateFileSystemObjectSchema = z.object({
-  fileSystemObjectType: z.enum(FileSystemObjectType),
+  type: z.enum(FileSystemObjectType),
   name: z.string()
 });
 
-export const AnyFileSystemObjectSchema = z.discriminatedUnion('fileSystemObjectType', [ FileSystemDirectorySchema, FileSystemFileSchema ]);
+export const AnyFileSystemObjectSchema = z.discriminatedUnion('type', [ FileSystemDirectorySchema, FileSystemFileSchema ]);
 
 export type AnyFileSystemObjectData = z.infer<typeof AnyFileSystemObjectSchema>;
 
 export type CreateFileSystemObjectData = z.infer<typeof CreateFileSystemObjectSchema>;
 
 export const CreateFileSystemDirectorySchema = CreateFileSystemObjectSchema.extend({
-  fileSystemObjectType: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory)
+  type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory)
 });
 
 export type CreateFileSystemDirectoryData = z.infer<typeof CreateFileSystemDirectorySchema>;
 
 export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
-  fileSystemObjectType: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
+  type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
   size: z.number(),
   mimeType: z.string()
 });
