@@ -1,5 +1,6 @@
 import z from 'zod';
 import mongoose from 'mongoose';
+import { IdsSchema, SkipTakeSchema } from './BaseData';
 
 export enum FileSystemObjectType {
   Directory = 'directory',
@@ -18,7 +19,7 @@ export const FileSystemObjectSchema = z.object({
   parentId: z.string().optional(),
   projectId: z.string(),
   name: z.string()
-});
+}).strip();
 
 export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
 
@@ -61,3 +62,19 @@ export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
 });
 
 export type CreateFileSystemFileData = z.infer<typeof CreateFileSystemFileSchema>;
+
+export const GetFileSystemObjectsSchema = z.object({
+  name: z.string().optional()
+});
+
+export type GetFileSystemObjectsData = z.infer<typeof GetFileSystemObjectsSchema>;
+
+export const GetFileSystemDirectoriesSchema = GetFileSystemObjectsSchema.and(IdsSchema.optional()).and(SkipTakeSchema.optional());
+
+export type GetFileSystemDirectoriesData = z.infer<typeof GetFileSystemDirectoriesSchema>;
+
+export const GetFileSystemFilesSchema = GetFileSystemObjectsSchema.extend({
+  mimeType: z.string().optional()
+}).and(IdsSchema.optional()).and(SkipTakeSchema.optional());
+
+export type GetFileSystemFilesData = z.infer<typeof GetFileSystemFilesSchema>;

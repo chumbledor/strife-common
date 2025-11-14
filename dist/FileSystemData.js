@@ -1,5 +1,6 @@
 import z from 'zod';
 import mongoose from 'mongoose';
+import { IdsSchema, SkipTakeSchema } from './BaseData';
 export var FileSystemObjectType;
 (function (FileSystemObjectType) {
     FileSystemObjectType["Directory"] = "directory";
@@ -14,7 +15,7 @@ export const FileSystemObjectSchema = z.object({
     parentId: z.string().optional(),
     projectId: z.string(),
     name: z.string()
-});
+}).strip();
 export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
     fileSystemObjectType: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
     childrenIds: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((childId) => childId.toString()).array()
@@ -37,4 +38,11 @@ export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
     size: z.number(),
     mimeType: z.string()
 });
+export const GetFileSystemObjectsSchema = z.object({
+    name: z.string().optional()
+});
+export const GetFileSystemDirectoriesSchema = GetFileSystemObjectsSchema.and(IdsSchema.optional()).and(SkipTakeSchema.optional());
+export const GetFileSystemFilesSchema = GetFileSystemObjectsSchema.extend({
+    mimeType: z.string().optional()
+}).and(IdsSchema.optional()).and(SkipTakeSchema.optional());
 //# sourceMappingURL=FileSystemData.js.map

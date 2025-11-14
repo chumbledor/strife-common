@@ -6,7 +6,7 @@ export type ProjectIdData = z.infer<typeof ProjectIdSchema>;
 export declare const ProjectSchema: z.ZodIntersection<z.ZodObject<{
     name: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
-    fileSystemRootObjectId: z.ZodString;
+    rootFileSystemObjectId: z.ZodString;
 }, z.core.$strip>, z.ZodObject<{
     id: z.ZodString;
 }, z.core.$strip>>;
