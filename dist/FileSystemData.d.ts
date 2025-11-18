@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import z from 'zod';
 export declare enum FileSystemObjectType {
-    Object = "FileSystemObjectModel",
-    Directory = "FileSystemDirectoryModel",
-    File = "FileSystemFileModel"
+    Object = "FileSystemObject",
+    Directory = "FileSystemDirectory",
+    File = "FileSystemFile"
 }
 export declare const FileSystemObjectIdSchema: z.ZodObject<{
     fileSystemObjectId: z.ZodString;
@@ -36,10 +36,6 @@ export declare const FileSystemFileSchema: z.ZodObject<{
     mimeType: z.ZodString;
 }, z.core.$strip>;
 export type FileSystemFileData = z.infer<typeof FileSystemFileSchema>;
-export declare const CreateFileSystemObjectSchema: z.ZodObject<{
-    type: z.ZodEnum<typeof FileSystemObjectType>;
-    name: z.ZodString;
-}, z.core.$strip>;
 export declare const AnyFileSystemObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
     id: z.ZodString;
     projectId: z.ZodString;
@@ -57,13 +53,20 @@ export declare const AnyFileSystemObjectSchema: z.ZodDiscriminatedUnion<[z.ZodOb
     mimeType: z.ZodString;
 }, z.core.$strip>], "type">;
 export type AnyFileSystemObjectData = z.infer<typeof AnyFileSystemObjectSchema>;
+export declare const CreateFileSystemObjectSchema: z.ZodObject<{
+    type: z.ZodEnum<typeof FileSystemObjectType>;
+    projectId: z.ZodString;
+    name: z.ZodString;
+}, z.core.$strip>;
 export type CreateFileSystemObjectData = z.infer<typeof CreateFileSystemObjectSchema>;
 export declare const CreateFileSystemDirectorySchema: z.ZodObject<{
+    projectId: z.ZodString;
     name: z.ZodString;
     type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
 }, z.core.$strip>;
 export type CreateFileSystemDirectoryData = z.infer<typeof CreateFileSystemDirectorySchema>;
 export declare const CreateFileSystemFileSchema: z.ZodObject<{
+    projectId: z.ZodString;
     name: z.ZodString;
     type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
     size: z.ZodNumber;
@@ -75,6 +78,7 @@ export declare const GetFileSystemObjectsSchema: z.ZodObject<{
     take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
     ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
     parentId: z.ZodOptional<z.ZodString>;
+    projectId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type GetFileSystemObjectsData = z.infer<typeof GetFileSystemObjectsSchema>;
@@ -83,6 +87,7 @@ export declare const GetFileSystemDirectoriesSchema: z.ZodObject<{
     take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
     ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
     parentId: z.ZodOptional<z.ZodString>;
+    projectId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type GetFileSystemDirectoriesData = z.infer<typeof GetFileSystemDirectoriesSchema>;
@@ -91,6 +96,7 @@ export declare const GetFileSystemFilesSchema: z.ZodObject<{
     take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
     ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
     parentId: z.ZodOptional<z.ZodString>;
+    projectId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
     mimeType: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;

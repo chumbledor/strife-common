@@ -4,9 +4,9 @@ import { IdsSchema, SkipTakeSchema } from './BaseData.js';
 import { UniqueSchema } from './UniqueData.js';
 export var FileSystemObjectType;
 (function (FileSystemObjectType) {
-    FileSystemObjectType["Object"] = "FileSystemObjectModel";
-    FileSystemObjectType["Directory"] = "FileSystemDirectoryModel";
-    FileSystemObjectType["File"] = "FileSystemFileModel";
+    FileSystemObjectType["Object"] = "FileSystemObject";
+    FileSystemObjectType["Directory"] = "FileSystemDirectory";
+    FileSystemObjectType["File"] = "FileSystemFile";
 })(FileSystemObjectType || (FileSystemObjectType = {}));
 export const FileSystemObjectIdSchema = z.object({
     fileSystemObjectId: z.string()
@@ -27,11 +27,12 @@ export const FileSystemFileSchema = FileSystemObjectSchema.extend({
     size: z.number(),
     mimeType: z.string(),
 }).strip();
+export const AnyFileSystemObjectSchema = z.discriminatedUnion('type', [FileSystemDirectorySchema, FileSystemFileSchema]);
 export const CreateFileSystemObjectSchema = z.object({
     type: z.enum(FileSystemObjectType),
+    projectId: z.string(),
     name: z.string()
 });
-export const AnyFileSystemObjectSchema = z.discriminatedUnion('type', [FileSystemDirectorySchema, FileSystemFileSchema]);
 export const CreateFileSystemDirectorySchema = CreateFileSystemObjectSchema.extend({
     type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory)
 });
@@ -42,6 +43,7 @@ export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
 });
 export const GetFileSystemObjectsSchema = z.object({
     parentId: z.string().optional(),
+    projectId: z.string().optional(),
     name: z.string().optional(),
     ...IdsSchema.shape,
     ...SkipTakeSchema.shape

@@ -4,9 +4,9 @@ import { IdsSchema, SkipTakeSchema } from './BaseData.js';
 import { UniqueSchema } from './UniqueData.js';
 
 export enum FileSystemObjectType {
-  Object = 'FileSystemObjectModel',
-  Directory = 'FileSystemDirectoryModel',
-  File = 'FileSystemFileModel'
+  Object = 'FileSystemObject',
+  Directory = 'FileSystemDirectory',
+  File = 'FileSystemFile'
 }
 
 export const FileSystemObjectIdSchema = z.object({
@@ -40,14 +40,15 @@ export const FileSystemFileSchema = FileSystemObjectSchema.extend({
 
 export type FileSystemFileData = z.infer<typeof FileSystemFileSchema>;
 
-export const CreateFileSystemObjectSchema = z.object({
-  type: z.enum(FileSystemObjectType),
-  name: z.string()
-});
-
 export const AnyFileSystemObjectSchema = z.discriminatedUnion('type', [ FileSystemDirectorySchema, FileSystemFileSchema ]);
 
 export type AnyFileSystemObjectData = z.infer<typeof AnyFileSystemObjectSchema>;
+
+export const CreateFileSystemObjectSchema = z.object({
+  type: z.enum(FileSystemObjectType),
+  projectId: z.string(),
+  name: z.string()
+});
 
 export type CreateFileSystemObjectData = z.infer<typeof CreateFileSystemObjectSchema>;
 
@@ -67,6 +68,7 @@ export type CreateFileSystemFileData = z.infer<typeof CreateFileSystemFileSchema
 
 export const GetFileSystemObjectsSchema = z.object({
   parentId: z.string().optional(),
+  projectId: z.string().optional(),
   name: z.string().optional(),
   ...IdsSchema.shape,
   ...SkipTakeSchema.shape
