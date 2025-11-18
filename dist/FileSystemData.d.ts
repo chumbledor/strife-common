@@ -79,7 +79,7 @@ export type CreateFileSystemFileData = z.infer<typeof CreateFileSystemFileSchema
 export declare const GetFileSystemObjectsSchema: z.ZodObject<{
     skip: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
     take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
-    ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    ids: z.ZodPipe<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodArray<z.ZodString>]>>, z.ZodTransform<string[] | undefined, string | string[] | undefined>>;
     parentId: z.ZodOptional<z.ZodString>;
     projectId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
@@ -88,7 +88,7 @@ export type GetFileSystemObjectsData = z.infer<typeof GetFileSystemObjectsSchema
 export declare const GetFileSystemDirectoriesSchema: z.ZodObject<{
     skip: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
     take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
-    ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    ids: z.ZodPipe<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodArray<z.ZodString>]>>, z.ZodTransform<string[] | undefined, string | string[] | undefined>>;
     parentId: z.ZodOptional<z.ZodString>;
     projectId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
@@ -97,7 +97,7 @@ export type GetFileSystemDirectoriesData = z.infer<typeof GetFileSystemDirectori
 export declare const GetFileSystemFilesSchema: z.ZodObject<{
     skip: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
     take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodNumber>>, z.ZodTransform<number, number>>;
-    ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    ids: z.ZodPipe<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodArray<z.ZodString>]>>, z.ZodTransform<string[] | undefined, string | string[] | undefined>>;
     parentId: z.ZodOptional<z.ZodString>;
     projectId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;

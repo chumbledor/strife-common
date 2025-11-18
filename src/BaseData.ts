@@ -7,7 +7,17 @@ export const IdSchema = z.object({
 export type IdData = z.infer<typeof IdSchema>;
 
 export const IdsSchema = z.object({
-  ids: z.string().array().optional()
+  ids: z
+    .union([ z.string(), z.string().array() ])
+    .optional()
+    .transform(
+      (value?: string | string[]): string[] | undefined => 
+        value
+          ? Array.isArray(value)
+            ? value
+            : [ value ]
+          : undefined
+    )
 });
 
 export type IdsData = z.infer<typeof IdsSchema>;

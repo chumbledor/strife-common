@@ -4,7 +4,7 @@ export declare const IdSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type IdData = z.infer<typeof IdSchema>;
 export declare const IdsSchema: z.ZodObject<{
-    ids: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    ids: z.ZodPipe<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodArray<z.ZodString>]>>, z.ZodTransform<string[] | undefined, string | string[] | undefined>>;
 }, z.core.$strip>;
 export type IdsData = z.infer<typeof IdsSchema>;
 export declare const SkipTakeSchema: z.ZodObject<{

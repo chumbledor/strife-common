@@ -3,7 +3,14 @@ export const IdSchema = z.object({
     id: z.string()
 });
 export const IdsSchema = z.object({
-    ids: z.string().array().optional()
+    ids: z
+        .union([z.string(), z.string().array()])
+        .optional()
+        .transform((value) => value
+        ? Array.isArray(value)
+            ? value
+            : [value]
+        : undefined)
 });
 const MaximumTakeCount = 100;
 export const SkipTakeSchema = z.object({
