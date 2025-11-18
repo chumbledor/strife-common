@@ -1,6 +1,7 @@
 export * from './AccountData.js';
 export * from './AccountValidation.js';
 export * from './Action.js';
+export * from './Algorithms.js';
 export * from './AuthenticationData.js';
 export * from './AuthenticationValidation.js';
 export * from './BaseData.js';
