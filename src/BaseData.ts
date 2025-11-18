@@ -25,8 +25,8 @@ export type IdsData = z.infer<typeof IdsSchema>;
 const MaximumTakeCount = 100;
 
 export const SkipTakeSchema = z.object({
-  skip: z.number().optional().default(0).transform((value: number): number => value ? Math.max(value, 0) : 0),
-  take: z.number().optional().default(MaximumTakeCount).transform((value: number): number => value ? Math.min(Math.max(value, 0), MaximumTakeCount) : MaximumTakeCount)
+  skip: z.preprocess((value: string | number): number => Number(value), z.number()).optional().default(0).transform((value: number): number => value ? Math.max(value, 0) : 0),
+  take: z.preprocess((value: string | number): number => Number(value), z.number()).optional().default(MaximumTakeCount).transform((value: number): number => value ? Math.min(Math.max(value, 0), MaximumTakeCount) : MaximumTakeCount)
 });
 
 export type SkipTakeData = z.infer<typeof SkipTakeSchema>;

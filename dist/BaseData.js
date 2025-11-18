@@ -14,7 +14,7 @@ export const IdsSchema = z.object({
 });
 const MaximumTakeCount = 100;
 export const SkipTakeSchema = z.object({
-    skip: z.number().optional().default(0).transform((value) => value ? Math.max(value, 0) : 0),
-    take: z.number().optional().default(MaximumTakeCount).transform((value) => value ? Math.min(Math.max(value, 0), MaximumTakeCount) : MaximumTakeCount)
+    skip: z.preprocess((value) => Number(value), z.number()).optional().default(0).transform((value) => value ? Math.max(value, 0) : 0),
+    take: z.preprocess((value) => Number(value), z.number()).optional().default(MaximumTakeCount).transform((value) => value ? Math.min(Math.max(value, 0), MaximumTakeCount) : MaximumTakeCount)
 });
 //# sourceMappingURL=BaseData.js.map
