@@ -31,6 +31,7 @@ export const AnyFileSystemObjectSchema = z.discriminatedUnion('type', [FileSyste
 export const CreateFileSystemObjectSchema = z.object({
     type: z.enum(FileSystemObjectType),
     projectId: z.string(),
+    parentId: z.string(),
     name: z.string()
 });
 export const CreateFileSystemDirectorySchema = CreateFileSystemObjectSchema.extend({

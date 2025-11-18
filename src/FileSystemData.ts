@@ -47,6 +47,7 @@ export type AnyFileSystemObjectData = z.infer<typeof AnyFileSystemObjectSchema>;
 export const CreateFileSystemObjectSchema = z.object({
   type: z.enum(FileSystemObjectType),
   projectId: z.string(),
+  parentId: z.string(),
   name: z.string()
 });
 

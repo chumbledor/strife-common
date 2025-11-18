@@ -56,17 +56,20 @@ export type AnyFileSystemObjectData = z.infer<typeof AnyFileSystemObjectSchema>;
 export declare const CreateFileSystemObjectSchema: z.ZodObject<{
     type: z.ZodEnum<typeof FileSystemObjectType>;
     projectId: z.ZodString;
+    parentId: z.ZodString;
     name: z.ZodString;
 }, z.core.$strip>;
 export type CreateFileSystemObjectData = z.infer<typeof CreateFileSystemObjectSchema>;
 export declare const CreateFileSystemDirectorySchema: z.ZodObject<{
     projectId: z.ZodString;
+    parentId: z.ZodString;
     name: z.ZodString;
     type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
 }, z.core.$strip>;
 export type CreateFileSystemDirectoryData = z.infer<typeof CreateFileSystemDirectorySchema>;
 export declare const CreateFileSystemFileSchema: z.ZodObject<{
     projectId: z.ZodString;
+    parentId: z.ZodString;
     name: z.ZodString;
     type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
     size: z.ZodNumber;
