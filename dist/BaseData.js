@@ -9,7 +9,7 @@ export const IdsSchema = z.object({
         .transform((value) => value
         ? Array.isArray(value)
             ? value
-            : [value]
+            : value.split(',')
         : undefined)
 });
 const MaximumTakeCount = 100;

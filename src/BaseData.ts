@@ -15,7 +15,7 @@ export const IdsSchema = z.object({
         value
           ? Array.isArray(value)
             ? value
-            : [ value ]
+            : value.split(',')
           : undefined
     )
 });
