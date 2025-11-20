@@ -12,7 +12,7 @@ export type FileSystemIdData = z.infer<typeof FileSystemIdSchema>;
 export const FileSystemSchema = z.object({
   rootFileSystemObjectId: z.string(),
   ...UniqueSchema.shape
-});
+}).strip();;
 
 export type FileSystemData = z.infer<typeof FileSystemSchema>;
 

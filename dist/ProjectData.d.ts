@@ -5,9 +5,12 @@ export declare const ProjectIdSchema: z.ZodObject<{
 export type ProjectIdData = z.infer<typeof ProjectIdSchema>;
 export declare const ProjectSchema: z.ZodObject<{
     id: z.ZodString;
+    fileSystem: z.ZodObject<{
+        id: z.ZodString;
+        rootFileSystemObjectId: z.ZodString;
+    }, z.core.$strip>;
     name: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
-    rootFileSystemObjectId: z.ZodString;
 }, z.core.$strip>;
 export type ProjectData = z.infer<typeof ProjectSchema>;
 export declare const CreateProjectSchema: z.ZodObject<{

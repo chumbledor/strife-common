@@ -8,7 +8,8 @@ export const FileSystemIdSchema = z.object({
 export const FileSystemSchema = z.object({
     rootFileSystemObjectId: z.string(),
     ...UniqueSchema.shape
-});
+}).strip();
+;
 export var FileSystemObjectType;
 (function (FileSystemObjectType) {
     FileSystemObjectType["Object"] = "FileSystemObject";
