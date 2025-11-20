@@ -19,7 +19,7 @@ export declare const GetProjectsSchema: z.ZodObject<{
     skip: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodPipe<z.ZodTransform<number, string | number>, z.ZodNumber>>>, z.ZodTransform<number, number>>;
     take: z.ZodPipe<z.ZodDefault<z.ZodOptional<z.ZodPipe<z.ZodTransform<number, string | number>, z.ZodNumber>>>, z.ZodTransform<number, number>>;
     ids: z.ZodPipe<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodArray<z.ZodString>]>>, z.ZodTransform<string[] | undefined, string | string[] | undefined>>;
-    account_id: z.ZodOptional<z.ZodString>;
+    accountId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type GetProjectsData = z.infer<typeof GetProjectsSchema>;

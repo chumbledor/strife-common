@@ -2,6 +2,13 @@ import mongoose from 'mongoose';
 import z from 'zod';
 import { IdsSchema, SkipTakeSchema } from './BaseData.js';
 import { UniqueSchema } from './UniqueData.js';
+export const FileSystemIdSchema = z.object({
+    fileSystemId: z.string()
+});
+export const FileSystemSchema = z.object({
+    rootFileSystemObjectId: z.string(),
+    ...UniqueSchema.shape
+});
 export var FileSystemObjectType;
 (function (FileSystemObjectType) {
     FileSystemObjectType["Object"] = "FileSystemObject";
@@ -13,7 +20,6 @@ export const FileSystemObjectIdSchema = z.object({
 });
 export const FileSystemObjectSchema = z.object({
     type: z.enum(FileSystemObjectType),
-    projectId: z.string(),
     parentId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((parentId) => parentId.toString()).optional(),
     name: z.string(),
     ...UniqueSchema.shape
@@ -30,7 +36,6 @@ export const FileSystemFileSchema = FileSystemObjectSchema.extend({
 export const AnyFileSystemObjectSchema = z.discriminatedUnion('type', [FileSystemDirectorySchema, FileSystemFileSchema]);
 export const CreateFileSystemObjectSchema = z.object({
     type: z.enum(FileSystemObjectType),
-    projectId: z.string(),
     parentId: z.string(),
     name: z.string()
 });
@@ -44,7 +49,6 @@ export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
 });
 export const GetFileSystemObjectsSchema = z.object({
     parentId: z.string().optional(),
-    projectId: z.string().optional(),
     name: z.string().optional(),
     ...IdsSchema.shape,
     ...SkipTakeSchema.shape
