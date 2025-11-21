@@ -12,9 +12,18 @@ export const IdsSchema = z.object({
             : value.split(',')
         : undefined)
 });
+const MinimumSkipCount = 0;
 const MaximumTakeCount = 100;
+const CoerceStringToNumber = z.preprocess((value) => {
+    if (!value)
+        return undefined;
+    const number = Number(value);
+    return !Number.isNaN(number)
+        ? number
+        : undefined;
+}, z.number());
 export const SkipTakeSchema = z.object({
-    skip: z.preprocess((value) => Number(value), z.number()).optional().default(0).transform((value) => value ? Math.max(value, 0) : 0),
-    take: z.preprocess((value) => Number(value), z.number()).optional().default(MaximumTakeCount).transform((value) => value ? Math.min(Math.max(value, 0), MaximumTakeCount) : MaximumTakeCount)
+    skip: CoerceStringToNumber.default(MinimumSkipCount).transform((value) => value ? Math.max(value, MinimumSkipCount) : MinimumSkipCount),
+    take: CoerceStringToNumber.default(MaximumTakeCount).transform((value) => value ? Math.min(Math.max(value, 0), MaximumTakeCount) : MaximumTakeCount)
 });
 //# sourceMappingURL=BaseData.js.map
