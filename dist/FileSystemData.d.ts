@@ -82,6 +82,18 @@ export declare const CreateFileSystemFileSchema: z.ZodObject<{
     mimeType: z.ZodString;
 }, z.core.$strip>;
 export type CreateFileSystemFileData = z.infer<typeof CreateFileSystemFileSchema>;
+export declare const AnyCreateFileSystemObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
+    parentId: z.ZodString;
+    name: z.ZodString;
+    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
+}, z.core.$strip>, z.ZodObject<{
+    parentId: z.ZodString;
+    name: z.ZodString;
+    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
+    size: z.ZodNumber;
+    mimeType: z.ZodString;
+}, z.core.$strip>], "type">;
+export type AnyCreateFileSystemObjectData = z.infer<typeof AnyCreateFileSystemObjectSchema>;
 export declare const GetFileSystemObjectsSchema: z.ZodObject<{
     skip: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
     take: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
@@ -107,3 +119,18 @@ export declare const GetFileSystemFilesSchema: z.ZodObject<{
     mimeType: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type GetFileSystemFilesData = z.infer<typeof GetFileSystemFilesSchema>;
+export declare const AnyGetFileSystemObjectsSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
+    skip: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
+    take: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
+    ids: z.ZodPipe<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodArray<z.ZodString>]>>, z.ZodTransform<string[] | undefined, string | string[] | undefined>>;
+    parentId: z.ZodOptional<z.ZodString>;
+    name: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>, z.ZodObject<{
+    skip: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
+    take: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
+    ids: z.ZodPipe<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodArray<z.ZodString>]>>, z.ZodTransform<string[] | undefined, string | string[] | undefined>>;
+    parentId: z.ZodOptional<z.ZodString>;
+    name: z.ZodOptional<z.ZodString>;
+    mimeType: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>], "type">;
+export type AnyGetFileSystemObjectsData = z.infer<typeof AnyGetFileSystemObjectsSchema>;

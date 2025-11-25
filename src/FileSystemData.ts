@@ -79,6 +79,9 @@ export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
 
 export type CreateFileSystemFileData = z.infer<typeof CreateFileSystemFileSchema>;
 
+export const AnyCreateFileSystemObjectSchema = z.discriminatedUnion('type', [ CreateFileSystemDirectorySchema, CreateFileSystemFileSchema ]);
+export type AnyCreateFileSystemObjectData = z.infer<typeof AnyCreateFileSystemObjectSchema>;
+
 export const GetFileSystemObjectsSchema = z.object({
   parentId: z.string().optional(),
   name: z.string().optional(),
@@ -97,3 +100,6 @@ export const GetFileSystemFilesSchema = GetFileSystemObjectsSchema.extend({
 });
 
 export type GetFileSystemFilesData = z.infer<typeof GetFileSystemFilesSchema>;
+
+export const AnyGetFileSystemObjectsSchema = z.discriminatedUnion('type', [ GetFileSystemDirectoriesSchema, GetFileSystemFilesSchema ]);
+export type AnyGetFileSystemObjectsData = z.infer<typeof AnyGetFileSystemObjectsSchema>;
