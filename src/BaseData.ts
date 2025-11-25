@@ -43,4 +43,5 @@ export const SkipTakeSchema = z.object({
   take: CoerceStringToNumber.default(MaximumTakeCount).transform((value: number): number => value ? Math.min(Math.max(value, 0), MaximumTakeCount) : MaximumTakeCount)
 });
 
+export type SkipTakeInput = z.input<typeof SkipTakeSchema>;
 export type SkipTakeData = z.infer<typeof SkipTakeSchema>;

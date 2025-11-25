@@ -11,4 +11,5 @@ export declare const SkipTakeSchema: z.ZodObject<{
     skip: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
     take: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
 }, z.core.$strip>;
+export type SkipTakeInput = z.input<typeof SkipTakeSchema>;
 export type SkipTakeData = z.infer<typeof SkipTakeSchema>;
