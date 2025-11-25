@@ -101,5 +101,5 @@ export const GetFileSystemFilesSchema = GetFileSystemObjectsSchema.extend({
 
 export type GetFileSystemFilesData = z.infer<typeof GetFileSystemFilesSchema>;
 
-export const AnyGetFileSystemObjectsSchema = z.discriminatedUnion('type', [ GetFileSystemDirectoriesSchema, GetFileSystemFilesSchema ]);
+export const AnyGetFileSystemObjectsSchema = z.union([ GetFileSystemDirectoriesSchema, GetFileSystemFilesSchema ]);
 export type AnyGetFileSystemObjectsData = z.infer<typeof AnyGetFileSystemObjectsSchema>;

@@ -60,5 +60,5 @@ export const GetFileSystemDirectoriesSchema = GetFileSystemObjectsSchema;
 export const GetFileSystemFilesSchema = GetFileSystemObjectsSchema.extend({
     mimeType: z.string().optional()
 });
-export const AnyGetFileSystemObjectsSchema = z.discriminatedUnion('type', [GetFileSystemDirectoriesSchema, GetFileSystemFilesSchema]);
+export const AnyGetFileSystemObjectsSchema = z.union([GetFileSystemDirectoriesSchema, GetFileSystemFilesSchema]);
 //# sourceMappingURL=FileSystemData.js.map

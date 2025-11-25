@@ -119,7 +119,7 @@ export declare const GetFileSystemFilesSchema: z.ZodObject<{
     mimeType: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type GetFileSystemFilesData = z.infer<typeof GetFileSystemFilesSchema>;
-export declare const AnyGetFileSystemObjectsSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
+export declare const AnyGetFileSystemObjectsSchema: z.ZodUnion<readonly [z.ZodObject<{
     skip: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
     take: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
     ids: z.ZodPipe<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodArray<z.ZodString>]>>, z.ZodTransform<string[] | undefined, string | string[] | undefined>>;
@@ -132,5 +132,5 @@ export declare const AnyGetFileSystemObjectsSchema: z.ZodDiscriminatedUnion<[z.Z
     parentId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
     mimeType: z.ZodOptional<z.ZodString>;
-}, z.core.$strip>], "type">;
+}, z.core.$strip>]>;
 export type AnyGetFileSystemObjectsData = z.infer<typeof AnyGetFileSystemObjectsSchema>;
