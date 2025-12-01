@@ -14,6 +14,11 @@ export declare enum FileSystemObjectType {
     Directory = "FileSystemDirectory",
     File = "FileSystemFile"
 }
+export declare enum FileSystemFileContentType {
+    Unknown = "FileSystemContent",
+    Text = "FileSystemTextContent",
+    Binary = "FileSystemBinaryContent"
+}
 export declare const FileSystemObjectIdSchema: z.ZodObject<{
     fileSystemObjectId: z.ZodString;
 }, z.core.$strip>;

@@ -22,6 +22,12 @@ export enum FileSystemObjectType {
   File = 'FileSystemFile'
 }
 
+export enum FileSystemFileContentType {
+  Unknown = 'FileSystemContent',
+  Text = 'FileSystemTextContent',
+  Binary = 'FileSystemBinaryContent'
+}
+
 export const FileSystemObjectIdSchema = z.object({
   fileSystemObjectId: z.string()
 });

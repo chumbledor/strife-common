@@ -16,6 +16,12 @@ export var FileSystemObjectType;
     FileSystemObjectType["Directory"] = "FileSystemDirectory";
     FileSystemObjectType["File"] = "FileSystemFile";
 })(FileSystemObjectType || (FileSystemObjectType = {}));
+export var FileSystemFileContentType;
+(function (FileSystemFileContentType) {
+    FileSystemFileContentType["Unknown"] = "FileSystemContent";
+    FileSystemFileContentType["Text"] = "FileSystemTextContent";
+    FileSystemFileContentType["Binary"] = "FileSystemBinaryContent";
+})(FileSystemFileContentType || (FileSystemFileContentType = {}));
 export const FileSystemObjectIdSchema = z.object({
     fileSystemObjectId: z.string()
 });
