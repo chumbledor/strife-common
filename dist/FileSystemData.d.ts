@@ -10,7 +10,7 @@ export declare const FileSystemSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type FileSystemData = z.infer<typeof FileSystemSchema>;
 export declare enum FileSystemObjectType {
-    Object = "FileSystemObject",
+    Unknown = "FileSystemObject",
     Directory = "FileSystemDirectory",
     File = "FileSystemFile"
 }
@@ -18,6 +18,10 @@ export declare enum FileSystemFileContentType {
     Unknown = "FileSystemContent",
     Text = "FileSystemTextContent",
     Binary = "FileSystemBinaryContent"
+}
+export declare enum FileSystemFileContentVersionType {
+    Unknown = "FileSystemFileContentVersion",
+    Binary = "FileSystemFileBinaryContentVersion"
 }
 export declare const FileSystemObjectIdSchema: z.ZodObject<{
     fileSystemObjectId: z.ZodString;

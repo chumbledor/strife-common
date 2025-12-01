@@ -12,7 +12,7 @@ export const FileSystemSchema = z.object({
 ;
 export var FileSystemObjectType;
 (function (FileSystemObjectType) {
-    FileSystemObjectType["Object"] = "FileSystemObject";
+    FileSystemObjectType["Unknown"] = "FileSystemObject";
     FileSystemObjectType["Directory"] = "FileSystemDirectory";
     FileSystemObjectType["File"] = "FileSystemFile";
 })(FileSystemObjectType || (FileSystemObjectType = {}));
@@ -22,6 +22,11 @@ export var FileSystemFileContentType;
     FileSystemFileContentType["Text"] = "FileSystemTextContent";
     FileSystemFileContentType["Binary"] = "FileSystemBinaryContent";
 })(FileSystemFileContentType || (FileSystemFileContentType = {}));
+export var FileSystemFileContentVersionType;
+(function (FileSystemFileContentVersionType) {
+    FileSystemFileContentVersionType["Unknown"] = "FileSystemFileContentVersion";
+    FileSystemFileContentVersionType["Binary"] = "FileSystemFileBinaryContentVersion";
+})(FileSystemFileContentVersionType || (FileSystemFileContentVersionType = {}));
 export const FileSystemObjectIdSchema = z.object({
     fileSystemObjectId: z.string()
 });

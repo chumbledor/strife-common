@@ -17,7 +17,7 @@ export const FileSystemSchema = z.object({
 export type FileSystemData = z.infer<typeof FileSystemSchema>;
 
 export enum FileSystemObjectType {
-  Object = 'FileSystemObject',
+  Unknown = 'FileSystemObject',
   Directory = 'FileSystemDirectory',
   File = 'FileSystemFile'
 }
@@ -26,6 +26,11 @@ export enum FileSystemFileContentType {
   Unknown = 'FileSystemContent',
   Text = 'FileSystemTextContent',
   Binary = 'FileSystemBinaryContent'
+}
+
+export enum FileSystemFileContentVersionType {
+  Unknown = 'FileSystemFileContentVersion',
+  Binary = 'FileSystemFileBinaryContentVersion'
 }
 
 export const FileSystemObjectIdSchema = z.object({
