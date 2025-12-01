@@ -42,7 +42,7 @@ export type FileSystemObjectIdData = z.infer<typeof FileSystemObjectIdSchema>;
 export const FileSystemObjectSchema = z.object({
   type: z.enum(FileSystemObjectType),
   fileSystemId: z.string(),
-  parentId: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((parentId: string | mongoose.Types.ObjectId): string => parentId.toString()).optional(),
+  parentFileSystemDirectoryId: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((parentId: string | mongoose.Types.ObjectId): string => parentId.toString()).optional(),
   name: z.string(),
   ...UniqueSchema.shape
 }).strip();
@@ -51,14 +51,13 @@ export type FileSystemObjectData = z.infer<typeof FileSystemObjectSchema>;
 
 export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
   type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
-  childrenIds: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((childId: string | mongoose.Types.ObjectId): string => childId.toString()).array()
+  childrenFileSystemObjectIds: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((childId: string | mongoose.Types.ObjectId): string => childId.toString()).array()
 }).strip();
 
 export type FileSystemDirectoryData = z.infer<typeof FileSystemDirectorySchema>;
 
 export const FileSystemFileSchema = FileSystemObjectSchema.extend({
   type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
-  size: z.number(),
   mimeType: z.string(),
 }).strip();
 
@@ -70,7 +69,7 @@ export type AnyFileSystemObjectData = z.infer<typeof AnyFileSystemObjectSchema>;
 
 export const CreateFileSystemObjectSchema = z.object({
   type: z.enum(FileSystemObjectType),
-  parentId: z.string(),
+  parentFileSystemDirectoryId: z.string(),
   name: z.string()
 });
 
@@ -84,7 +83,6 @@ export type CreateFileSystemDirectoryData = z.infer<typeof CreateFileSystemDirec
 
 export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
   type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
-  size: z.number(),
   mimeType: z.string()
 });
 
@@ -94,7 +92,7 @@ export const AnyCreateFileSystemObjectSchema = z.discriminatedUnion('type', [ Cr
 export type AnyCreateFileSystemObjectData = z.infer<typeof AnyCreateFileSystemObjectSchema>;
 
 export const GetFileSystemObjectsSchema = z.object({
-  parentId: z.string().optional(),
+  parentFileSystemDirectoryId: z.string().optional(),
   name: z.string().optional(),
   ...IdsSchema.shape,
   ...SkipTakeSchema.shape

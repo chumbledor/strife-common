@@ -33,23 +33,22 @@ export const FileSystemObjectIdSchema = z.object({
 export const FileSystemObjectSchema = z.object({
     type: z.enum(FileSystemObjectType),
     fileSystemId: z.string(),
-    parentId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((parentId) => parentId.toString()).optional(),
+    parentFileSystemDirectoryId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((parentId) => parentId.toString()).optional(),
     name: z.string(),
     ...UniqueSchema.shape
 }).strip();
 export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
     type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
-    childrenIds: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((childId) => childId.toString()).array()
+    childrenFileSystemObjectIds: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((childId) => childId.toString()).array()
 }).strip();
 export const FileSystemFileSchema = FileSystemObjectSchema.extend({
     type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
-    size: z.number(),
     mimeType: z.string(),
 }).strip();
 export const AnyFileSystemObjectSchema = z.discriminatedUnion('type', [FileSystemDirectorySchema, FileSystemFileSchema]);
 export const CreateFileSystemObjectSchema = z.object({
     type: z.enum(FileSystemObjectType),
-    parentId: z.string(),
+    parentFileSystemDirectoryId: z.string(),
     name: z.string()
 });
 export const CreateFileSystemDirectorySchema = CreateFileSystemObjectSchema.extend({
@@ -57,12 +56,11 @@ export const CreateFileSystemDirectorySchema = CreateFileSystemObjectSchema.exte
 });
 export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
     type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
-    size: z.number(),
     mimeType: z.string()
 });
 export const AnyCreateFileSystemObjectSchema = z.discriminatedUnion('type', [CreateFileSystemDirectorySchema, CreateFileSystemFileSchema]);
 export const GetFileSystemObjectsSchema = z.object({
-    parentId: z.string().optional(),
+    parentFileSystemDirectoryId: z.string().optional(),
     name: z.string().optional(),
     ...IdsSchema.shape,
     ...SkipTakeSchema.shape
