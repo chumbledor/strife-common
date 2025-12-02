@@ -1,7 +1,7 @@
 import z from 'zod';
-import { IdsSchema, SkipTakeSchema } from './BaseData.js';
-import { FileSystemSchema } from './FileSystemData.js';
-import { UniqueSchema } from './UniqueData.js';
+import { IdsSchema, SkipTakeSchema } from './Base.data.js';
+import { FileSystemSchema } from './FileSystem.data.js';
+import { UniqueSchema } from './Unique.data.js';
 
 export const ProjectIdSchema = z.object({
   projectId: z.string()

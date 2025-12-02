@@ -1,13 +1,7 @@
 import z from 'zod';
-import { IdsSchema, SkipTakeSchema } from './BaseData.js';
-import { UniqueSchema } from './UniqueData.js';
-import { AuthenticationSchema } from './AuthenticationData.js';
-
-export const AccountIdSchema = z.object({
-  accountId: z.string()
-});
-
-export type AccountIdData = z.infer<typeof AccountIdSchema>;
+import { AuthenticationSchema } from './Authentication.data.js';
+import { IdsSchema, SkipTakeSchema } from './Base.data.js';
+import { UniqueSchema } from './Unique.data.js';
 
 export const AccountSchema = z.object({
   authentication: AuthenticationSchema.optional(),
@@ -17,6 +11,12 @@ export const AccountSchema = z.object({
 }).strip();
 
 export type AccountData = z.infer<typeof AccountSchema>;
+
+export const AccountIdSchema = z.object({
+  accountId: z.string()
+});
+
+export type AccountIdData = z.infer<typeof AccountIdSchema>;
 
 export const CreateAccountSchema = z.object({
   email: z.string(),
@@ -39,4 +39,4 @@ export const UpdateAccountSchema = z.object({
   username: z.string().optional()
 });
 
-export type UpdateAccountData = z.infer<typeof UpdateAccountSchema>;
+export type UpdateAccountsData = z.infer<typeof UpdateAccountSchema>;

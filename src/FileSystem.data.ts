@@ -1,7 +1,30 @@
 import mongoose from 'mongoose';
 import z from 'zod';
-import { IdsSchema, SkipTakeSchema } from './BaseData.js';
-import { UniqueSchema } from './UniqueData.js';
+import { IdsSchema, SkipTakeSchema } from './Base.data.js';
+import { UniqueSchema } from './Unique.data.js';
+
+export const FileSystemObjectDiscriminator = 'type';
+
+export enum FileSystemObjectType {
+  Unknown = 'FileSystemObject',
+  Directory = 'FileSystemDirectory',
+  File = 'FileSystemFile'
+}
+
+export const FileSystemFileContentDiscriminator = 'type';
+
+export enum FileSystemFileContentType {
+  Unknown = 'FileSystemContent',
+  Text = 'FileSystemTextContent',
+  Binary = 'FileSystemBinaryContent'
+}
+
+export const FileSystemFileContentVersionDiscriminator = 'type';
+
+export enum FileSystemFileContentVersionType {
+  Unknown = 'FileSystemFileContentVersion',
+  Binary = 'FileSystemFileBinaryContentVersion'
+}
 
 export const FileSystemIdSchema = z.object({
   fileSystemId: z.string()
@@ -15,23 +38,6 @@ export const FileSystemSchema = z.object({
 }).strip();;
 
 export type FileSystemData = z.infer<typeof FileSystemSchema>;
-
-export enum FileSystemObjectType {
-  Unknown = 'FileSystemObject',
-  Directory = 'FileSystemDirectory',
-  File = 'FileSystemFile'
-}
-
-export enum FileSystemFileContentType {
-  Unknown = 'FileSystemContent',
-  Text = 'FileSystemTextContent',
-  Binary = 'FileSystemBinaryContent'
-}
-
-export enum FileSystemFileContentVersionType {
-  Unknown = 'FileSystemFileContentVersion',
-  Binary = 'FileSystemFileBinaryContentVersion'
-}
 
 export const FileSystemObjectIdSchema = z.object({
   fileSystemObjectId: z.string()
@@ -63,7 +69,7 @@ export const FileSystemFileSchema = FileSystemObjectSchema.extend({
 
 export type FileSystemFileData = z.infer<typeof FileSystemFileSchema>;
 
-export const AnyFileSystemObjectSchema = z.discriminatedUnion('type', [ FileSystemDirectorySchema, FileSystemFileSchema ]);
+export const AnyFileSystemObjectSchema = z.discriminatedUnion(FileSystemObjectDiscriminator, [ FileSystemDirectorySchema, FileSystemFileSchema ]);
 
 export type AnyFileSystemObjectData = z.infer<typeof AnyFileSystemObjectSchema>;
 
@@ -88,7 +94,7 @@ export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
 
 export type CreateFileSystemFileData = z.infer<typeof CreateFileSystemFileSchema>;
 
-export const AnyCreateFileSystemObjectSchema = z.discriminatedUnion('type', [ CreateFileSystemDirectorySchema, CreateFileSystemFileSchema ]);
+export const AnyCreateFileSystemObjectSchema = z.discriminatedUnion(FileSystemObjectDiscriminator, [ CreateFileSystemDirectorySchema, CreateFileSystemFileSchema ]);
 export type AnyCreateFileSystemObjectData = z.infer<typeof AnyCreateFileSystemObjectSchema>;
 
 export const GetFileSystemObjectsSchema = z.object({

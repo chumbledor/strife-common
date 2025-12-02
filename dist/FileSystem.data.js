@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import z from 'zod';
-import { IdsSchema, SkipTakeSchema } from './BaseData.js';
-import { UniqueSchema } from './UniqueData.js';
+import { IdsSchema, SkipTakeSchema } from './Base.data.js';
+import { UniqueSchema } from './Unique.data.js';
 export const FileSystemObjectDiscriminator = 'type';
 export var FileSystemObjectType;
 (function (FileSystemObjectType) {
@@ -73,4 +73,4 @@ export const GetFileSystemFilesSchema = GetFileSystemObjectsSchema.extend({
     mimeType: z.string().optional()
 });
 export const AnyGetFileSystemObjectsSchema = z.union([GetFileSystemDirectoriesSchema, GetFileSystemFilesSchema]);
-//# sourceMappingURL=FileSystemData.js.map
+//# sourceMappingURL=FileSystem.data.js.map

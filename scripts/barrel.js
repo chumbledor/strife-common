@@ -10,12 +10,15 @@ const srcDir = path.resolve(__dirname, '../src');
 const indexFile = path.join(srcDir, 'index.ts');
 
 const files = fs.readdirSync(srcDir)
-  .filter(f => f.endsWith('.ts') && f !== 'index.ts');
+  .filter(file => file.endsWith('.ts') && file !== 'index.ts');
 
-const exportsContent = files.map(f => {
-  const name = f.replace(/\.ts$/, '.js');
-  return `export * from './${name}';`;
-}).join('\n');
+const exportsContent = files.map(
+  file => {
+    const filename = file.replace(/\.ts$/, '.js');
+    const name = filename.split('.')[0];
+    return `export * as ${name} from './${filename}';`;
+  }
+).join('\n');
 
 fs.writeFileSync(indexFile, exportsContent);
 console.log('Generated: src/index.ts');
