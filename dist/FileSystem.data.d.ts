@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import z from 'zod';
 export declare const ObjectDiscriminator = "type";
-export declare enum FileSystemObjectType {
+export declare enum ObjectType {
     Unknown = "FileSystemObject",
     Directory = "FileSystemDirectory",
     File = "FileSystemFile"
@@ -33,7 +33,7 @@ export type ObjectIdData = z.infer<typeof ObjectIdSchema>;
 export declare const ObjectSchema: z.ZodObject<{
     id: z.ZodString;
     rootFileSystemObjectId: z.ZodString;
-    type: z.ZodEnum<typeof FileSystemObjectType>;
+    type: z.ZodEnum<typeof ObjectType>;
     fileSystemId: z.ZodString;
     parentFileSystemDirectoryId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     name: z.ZodString;
@@ -45,7 +45,7 @@ export declare const DirectoryObjectSchema: z.ZodObject<{
     fileSystemId: z.ZodString;
     parentFileSystemDirectoryId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     name: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.Directory>>;
     childrenFileSystemObjectIds: z.ZodArray<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
 }, z.core.$strip>;
 export type DirectoryObjectData = z.infer<typeof DirectoryObjectSchema>;
@@ -55,7 +55,7 @@ export declare const FileObjectSchema: z.ZodObject<{
     fileSystemId: z.ZodString;
     parentFileSystemDirectoryId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     name: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.File>>;
     mimeType: z.ZodString;
 }, z.core.$strip>;
 export type FileObjectData = z.infer<typeof FileObjectSchema>;
@@ -65,7 +65,7 @@ export declare const AnyObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
     fileSystemId: z.ZodString;
     parentFileSystemDirectoryId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     name: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.Directory>>;
     childrenFileSystemObjectIds: z.ZodArray<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
 }, z.core.$strip>, z.ZodObject<{
     id: z.ZodString;
@@ -73,12 +73,12 @@ export declare const AnyObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
     fileSystemId: z.ZodString;
     parentFileSystemDirectoryId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     name: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.File>>;
     mimeType: z.ZodString;
 }, z.core.$strip>], "type">;
 export type AnyObjectData = z.infer<typeof AnyObjectSchema>;
 export declare const CreateObjectSchema: z.ZodObject<{
-    type: z.ZodEnum<typeof FileSystemObjectType>;
+    type: z.ZodEnum<typeof ObjectType>;
     parentFileSystemDirectoryId: z.ZodString;
     name: z.ZodString;
 }, z.core.$strip>;
@@ -86,24 +86,24 @@ export type CreateObjectData = z.infer<typeof CreateObjectSchema>;
 export declare const CreateDirectoryObjectSchema: z.ZodObject<{
     parentFileSystemDirectoryId: z.ZodString;
     name: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.Directory>>;
 }, z.core.$strip>;
 export type CreateDirectoryObjectData = z.infer<typeof CreateDirectoryObjectSchema>;
 export declare const CreateFileObjectSchema: z.ZodObject<{
     parentFileSystemDirectoryId: z.ZodString;
     name: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.File>>;
     mimeType: z.ZodString;
 }, z.core.$strip>;
 export type CreateFileObjectData = z.infer<typeof CreateFileObjectSchema>;
 export declare const AnyCreateObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
     parentFileSystemDirectoryId: z.ZodString;
     name: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.Directory>>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.Directory>>;
 }, z.core.$strip>, z.ZodObject<{
     parentFileSystemDirectoryId: z.ZodString;
     name: z.ZodString;
-    type: z.ZodDefault<z.ZodLiteral<FileSystemObjectType.File>>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.File>>;
     mimeType: z.ZodString;
 }, z.core.$strip>], "type">;
 export type AnyCreateObjectData = z.infer<typeof AnyCreateObjectSchema>;

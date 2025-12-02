@@ -3,12 +3,12 @@ import z from 'zod';
 import * as Base from './Base.data.js';
 import * as Unique from './Unique.data.js';
 export const ObjectDiscriminator = 'type';
-export var FileSystemObjectType;
-(function (FileSystemObjectType) {
-    FileSystemObjectType["Unknown"] = "FileSystemObject";
-    FileSystemObjectType["Directory"] = "FileSystemDirectory";
-    FileSystemObjectType["File"] = "FileSystemFile";
-})(FileSystemObjectType || (FileSystemObjectType = {}));
+export var ObjectType;
+(function (ObjectType) {
+    ObjectType["Unknown"] = "FileSystemObject";
+    ObjectType["Directory"] = "FileSystemDirectory";
+    ObjectType["File"] = "FileSystemFile";
+})(ObjectType || (ObjectType = {}));
 export const FileContentDiscriminator = 'type';
 export var FileContentType;
 (function (FileContentType) {
@@ -34,31 +34,31 @@ export const ObjectIdSchema = z.object({
     fileSystemObjectId: z.string()
 });
 export const ObjectSchema = z.object({
-    type: z.enum(FileSystemObjectType),
+    type: z.enum(ObjectType),
     fileSystemId: z.string(),
     parentFileSystemDirectoryId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((parentId) => parentId.toString()).optional(),
     name: z.string(),
     ...Schema.shape
 }).strip();
 export const DirectoryObjectSchema = ObjectSchema.extend({
-    type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
+    type: z.literal(ObjectType.Directory).default(ObjectType.Directory),
     childrenFileSystemObjectIds: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((childId) => childId.toString()).array()
 }).strip();
 export const FileObjectSchema = ObjectSchema.extend({
-    type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
+    type: z.literal(ObjectType.File).default(ObjectType.File),
     mimeType: z.string(),
 }).strip();
 export const AnyObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [DirectoryObjectSchema, FileObjectSchema]);
 export const CreateObjectSchema = z.object({
-    type: z.enum(FileSystemObjectType),
+    type: z.enum(ObjectType),
     parentFileSystemDirectoryId: z.string(),
     name: z.string()
 });
 export const CreateDirectoryObjectSchema = CreateObjectSchema.extend({
-    type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory)
+    type: z.literal(ObjectType.Directory).default(ObjectType.Directory)
 });
 export const CreateFileObjectSchema = CreateObjectSchema.extend({
-    type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
+    type: z.literal(ObjectType.File).default(ObjectType.File),
     mimeType: z.string()
 });
 export const AnyCreateObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [CreateDirectoryObjectSchema, CreateFileObjectSchema]);
