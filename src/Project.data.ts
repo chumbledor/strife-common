@@ -1,42 +1,42 @@
 import z from 'zod';
-import { IdsSchema, SkipTakeSchema } from './Base.data.js';
-import { FileSystemSchema } from './FileSystem.data.js';
-import { UniqueSchema } from './Unique.data.js';
+import * as Base from './Base.data.js';
+import * as FileSystem from './FileSystem.data.js';
+import * as Unique from './Unique.data.js';
 
-export const ProjectIdSchema = z.object({
+export const Schema = z.object({
+  fileSystem: FileSystem.Schema,
+  name: z.string(),
+  description: z.string().optional(),
+  ...Unique.Schema.shape
+}).strip();
+
+export type Data = z.infer<typeof Schema>;
+
+export const IdSchema = z.object({
   projectId: z.string()
 });
 
-export type ProjectIdData = z.infer<typeof ProjectIdSchema>;
+export type IdData = z.infer<typeof IdSchema>;
 
-export const ProjectSchema = z.object({
-  fileSystem: FileSystemSchema,
-  name: z.string(),
-  description: z.string().optional(),
-  ...UniqueSchema.shape
-}).strip();
-
-export type ProjectData = z.infer<typeof ProjectSchema>;
-
-export const CreateProjectSchema = z.object({
+export const CreateSchema = z.object({
   name: z.string(),
   description: z.string().optional()
 });
 
-export type CreateProjectData = z.infer<typeof CreateProjectSchema>;
+export type CreateData = z.infer<typeof CreateSchema>;
 
-export const GetProjectsSchema = z.object({
+export const GetSchema = z.object({
   accountId: z.string().optional(),
   name: z.string().optional(),
-  ...IdsSchema.shape,
-  ...SkipTakeSchema.shape
+  ...Base.IdsSchema.shape,
+  ...Base.SkipTakeSchema.shape
 });
 
-export type GetProjectsData = z.infer<typeof GetProjectsSchema>;
+export type GetData = z.infer<typeof GetSchema>;
 
-export const UpdateProjectSchema = z.object({
+export const UpdateSchema = z.object({
   name: z.string().optional(),
   description: z.string().optional()
 });
 
-export type UpdateProjectData = z.infer<typeof UpdateProjectSchema>;
+export type UpdateData = z.infer<typeof UpdateSchema>;

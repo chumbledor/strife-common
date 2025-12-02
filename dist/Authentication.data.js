@@ -1,12 +1,12 @@
 import z from 'zod';
-export const AuthenticationSchema = z.object({
+export const Schema = z.object({
     accessToken: z.string().optional()
 }).strip();
-export const LoginAuthenticationSchema = z.object({
+export const LoginSchema = z.object({
     email: z.string(),
     password: z.string()
 });
-export const UpdateAuthenticationSchema = z.object({
+export const UpdateSchema = z.object({
     password: z.string().optional()
 });
 //# sourceMappingURL=Authentication.data.js.map

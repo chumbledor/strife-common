@@ -1,20 +1,20 @@
 import z from 'zod';
 
-export const AuthenticationSchema = z.object({
+export const Schema = z.object({
   accessToken: z.string().optional()
 }).strip();
 
-export type AuthenticationData = z.infer<typeof AuthenticationSchema>;
+export type Data = z.infer<typeof Schema>;
 
-export const LoginAuthenticationSchema = z.object({
+export const LoginSchema = z.object({
   email: z.string(),
   password: z.string()
 });
 
-export type LoginAuthenticationData = z.infer<typeof LoginAuthenticationSchema>;
+export type LoginData = z.infer<typeof LoginSchema>;
 
-export const UpdateAuthenticationSchema = z.object({
+export const UpdateSchema = z.object({
   password: z.string().optional()
 });
 
-export type UpdateAuthenticationData = z.infer<typeof UpdateAuthenticationSchema>;
+export type UpdateData = z.infer<typeof UpdateSchema>;

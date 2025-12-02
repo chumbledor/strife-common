@@ -1,42 +1,42 @@
 import z from 'zod';
-import { AuthenticationSchema } from './Authentication.data.js';
-import { IdsSchema, SkipTakeSchema } from './Base.data.js';
-import { UniqueSchema } from './Unique.data.js';
+import * as Authentication from './Authentication.data.js';
+import * as Base from './Base.data.js';
+import * as Unique from './Unique.data.js';
 
-export const AccountSchema = z.object({
-  authentication: AuthenticationSchema.optional(),
+export const Schema = z.object({
+  authentication: Authentication.Schema.optional(),
   email: z.string(),
   username: z.string(),
-  ...UniqueSchema.shape
+  ...Unique.Schema.shape
 }).strip();
 
-export type AccountData = z.infer<typeof AccountSchema>;
+export type Data = z.infer<typeof Schema>;
 
-export const AccountIdSchema = z.object({
+export const IdSchema = z.object({
   accountId: z.string()
 });
 
-export type AccountIdData = z.infer<typeof AccountIdSchema>;
+export type IdData = z.infer<typeof IdSchema>;
 
-export const CreateAccountSchema = z.object({
+export const CreateSchema = z.object({
   email: z.string(),
   username: z.string(),
   password: z.string()
 });
 
-export type CreateAccountData = z.infer<typeof CreateAccountSchema>;
+export type CreateData = z.infer<typeof CreateSchema>;
 
-export const GetAccountsSchema = z.object({
+export const GetSchema = z.object({
   username: z.string().optional(),
-  ...IdsSchema.shape,
-  ...SkipTakeSchema.shape
+  ...Base.IdsSchema.shape,
+  ...Base.SkipTakeSchema.shape
 });
 
-export type GetAccountsData = z.infer<typeof GetAccountsSchema>;
+export type GetData = z.infer<typeof GetSchema>;
 
-export const UpdateAccountSchema = z.object({
+export const UpdateSchema = z.object({
   email: z.string().optional(),
   username: z.string().optional()
 });
 
-export type UpdateAccountsData = z.infer<typeof UpdateAccountSchema>;
+export type UpdateData = z.infer<typeof UpdateSchema>;

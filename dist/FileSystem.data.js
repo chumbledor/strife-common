@@ -1,76 +1,76 @@
 import mongoose from 'mongoose';
 import z from 'zod';
-import { IdsSchema, SkipTakeSchema } from './Base.data.js';
-import { UniqueSchema } from './Unique.data.js';
-export const FileSystemObjectDiscriminator = 'type';
+import * as Base from './Base.data.js';
+import * as Unique from './Unique.data.js';
+export const ObjectDiscriminator = 'type';
 export var FileSystemObjectType;
 (function (FileSystemObjectType) {
     FileSystemObjectType["Unknown"] = "FileSystemObject";
     FileSystemObjectType["Directory"] = "FileSystemDirectory";
     FileSystemObjectType["File"] = "FileSystemFile";
 })(FileSystemObjectType || (FileSystemObjectType = {}));
-export const FileSystemFileContentDiscriminator = 'type';
-export var FileSystemFileContentType;
-(function (FileSystemFileContentType) {
-    FileSystemFileContentType["Unknown"] = "FileSystemContent";
-    FileSystemFileContentType["Text"] = "FileSystemTextContent";
-    FileSystemFileContentType["Binary"] = "FileSystemBinaryContent";
-})(FileSystemFileContentType || (FileSystemFileContentType = {}));
-export const FileSystemFileContentVersionDiscriminator = 'type';
-export var FileSystemFileContentVersionType;
-(function (FileSystemFileContentVersionType) {
-    FileSystemFileContentVersionType["Unknown"] = "FileSystemFileContentVersion";
-    FileSystemFileContentVersionType["Binary"] = "FileSystemFileBinaryContentVersion";
-})(FileSystemFileContentVersionType || (FileSystemFileContentVersionType = {}));
-export const FileSystemIdSchema = z.object({
-    fileSystemId: z.string()
-});
-export const FileSystemSchema = z.object({
+export const FileContentDiscriminator = 'type';
+export var FileContentType;
+(function (FileContentType) {
+    FileContentType["Unknown"] = "FileSystemContent";
+    FileContentType["Text"] = "FileSystemTextContent";
+    FileContentType["Binary"] = "FileSystemBinaryContent";
+})(FileContentType || (FileContentType = {}));
+export const FileContentVersionDiscriminator = 'type';
+export var FileContentVersionType;
+(function (FileContentVersionType) {
+    FileContentVersionType["Unknown"] = "FileSystemFileContentVersion";
+    FileContentVersionType["Binary"] = "FileSystemFileBinaryContentVersion";
+})(FileContentVersionType || (FileContentVersionType = {}));
+export const Schema = z.object({
     rootFileSystemObjectId: z.string(),
-    ...UniqueSchema.shape
+    ...Unique.Schema.shape
 }).strip();
 ;
-export const FileSystemObjectIdSchema = z.object({
+export const IdSchema = z.object({
+    fileSystemId: z.string()
+});
+export const ObjectIdSchema = z.object({
     fileSystemObjectId: z.string()
 });
-export const FileSystemObjectSchema = z.object({
+export const ObjectSchema = z.object({
     type: z.enum(FileSystemObjectType),
     fileSystemId: z.string(),
     parentFileSystemDirectoryId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((parentId) => parentId.toString()).optional(),
     name: z.string(),
-    ...UniqueSchema.shape
+    ...Schema.shape
 }).strip();
-export const FileSystemDirectorySchema = FileSystemObjectSchema.extend({
+export const DirectoryObjectSchema = ObjectSchema.extend({
     type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory),
     childrenFileSystemObjectIds: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((childId) => childId.toString()).array()
 }).strip();
-export const FileSystemFileSchema = FileSystemObjectSchema.extend({
+export const FileObjectSchema = ObjectSchema.extend({
     type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
     mimeType: z.string(),
 }).strip();
-export const AnyFileSystemObjectSchema = z.discriminatedUnion(FileSystemObjectDiscriminator, [FileSystemDirectorySchema, FileSystemFileSchema]);
-export const CreateFileSystemObjectSchema = z.object({
+export const AnyObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [DirectoryObjectSchema, FileObjectSchema]);
+export const CreateObjectSchema = z.object({
     type: z.enum(FileSystemObjectType),
     parentFileSystemDirectoryId: z.string(),
     name: z.string()
 });
-export const CreateFileSystemDirectorySchema = CreateFileSystemObjectSchema.extend({
+export const CreateDirectoryObjectSchema = CreateObjectSchema.extend({
     type: z.literal(FileSystemObjectType.Directory).default(FileSystemObjectType.Directory)
 });
-export const CreateFileSystemFileSchema = CreateFileSystemObjectSchema.extend({
+export const CreateFileObjectSchema = CreateObjectSchema.extend({
     type: z.literal(FileSystemObjectType.File).default(FileSystemObjectType.File),
     mimeType: z.string()
 });
-export const AnyCreateFileSystemObjectSchema = z.discriminatedUnion(FileSystemObjectDiscriminator, [CreateFileSystemDirectorySchema, CreateFileSystemFileSchema]);
-export const GetFileSystemObjectsSchema = z.object({
+export const AnyCreateObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [CreateDirectoryObjectSchema, CreateFileObjectSchema]);
+export const GetObjectsSchema = z.object({
     parentFileSystemDirectoryId: z.string().optional(),
     name: z.string().optional(),
-    ...IdsSchema.shape,
-    ...SkipTakeSchema.shape
+    ...Base.IdsSchema.shape,
+    ...Base.SkipTakeSchema.shape
 });
-export const GetFileSystemDirectoriesSchema = GetFileSystemObjectsSchema;
-export const GetFileSystemFilesSchema = GetFileSystemObjectsSchema.extend({
+export const GetDirectoryObjectsSchema = GetObjectsSchema;
+export const GetFileObjectsSchema = GetObjectsSchema.extend({
     mimeType: z.string().optional()
 });
-export const AnyGetFileSystemObjectsSchema = z.union([GetFileSystemDirectoriesSchema, GetFileSystemFilesSchema]);
+export const AnyGetObjectsSchema = z.union([GetDirectoryObjectsSchema, GetFileObjectsSchema]);
 //# sourceMappingURL=FileSystem.data.js.map

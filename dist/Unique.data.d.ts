@@ -1,5 +1,5 @@
 import z from 'zod';
-export declare const UniqueSchema: z.ZodObject<{
+export declare const Schema: z.ZodObject<{
     id: z.ZodString;
 }, z.core.$strip>;
-export type UniqueData = z.infer<typeof UniqueSchema>;
+export type Data = z.infer<typeof Schema>;

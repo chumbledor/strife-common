@@ -1,9 +1,5 @@
 import z from 'zod';
-export declare const ProjectIdSchema: z.ZodObject<{
-    projectId: z.ZodString;
-}, z.core.$strip>;
-export type ProjectIdData = z.infer<typeof ProjectIdSchema>;
-export declare const ProjectSchema: z.ZodObject<{
+export declare const Schema: z.ZodObject<{
     id: z.ZodString;
     fileSystem: z.ZodObject<{
         id: z.ZodString;
@@ -12,22 +8,26 @@ export declare const ProjectSchema: z.ZodObject<{
     name: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
-export type ProjectData = z.infer<typeof ProjectSchema>;
-export declare const CreateProjectSchema: z.ZodObject<{
+export type Data = z.infer<typeof Schema>;
+export declare const IdSchema: z.ZodObject<{
+    projectId: z.ZodString;
+}, z.core.$strip>;
+export type IdData = z.infer<typeof IdSchema>;
+export declare const CreateSchema: z.ZodObject<{
     name: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
-export type CreateProjectData = z.infer<typeof CreateProjectSchema>;
-export declare const GetProjectsSchema: z.ZodObject<{
+export type CreateData = z.infer<typeof CreateSchema>;
+export declare const GetSchema: z.ZodObject<{
     skip: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
     take: z.ZodPipe<z.ZodDefault<z.ZodPipe<z.ZodTransform<number | undefined, string | number | undefined>, z.ZodNumber>>, z.ZodTransform<number, number>>;
     ids: z.ZodPipe<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodArray<z.ZodString>]>>, z.ZodTransform<string[] | undefined, string | string[] | undefined>>;
     accountId: z.ZodOptional<z.ZodString>;
     name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
-export type GetProjectsData = z.infer<typeof GetProjectsSchema>;
-export declare const UpdateProjectSchema: z.ZodObject<{
+export type GetData = z.infer<typeof GetSchema>;
+export declare const UpdateSchema: z.ZodObject<{
     name: z.ZodOptional<z.ZodString>;
     description: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
-export type UpdateProjectData = z.infer<typeof UpdateProjectSchema>;
+export type UpdateData = z.infer<typeof UpdateSchema>;

@@ -1,7 +1,7 @@
 import z from 'zod';
 
-export const UniqueSchema = z.object({
+export const Schema = z.object({
   id: z.string()
 });
 
-export type UniqueData = z.infer<typeof UniqueSchema>;
+export type Data = z.infer<typeof Schema>;

@@ -1,27 +1,27 @@
 import z from 'zod';
-import { AuthenticationSchema } from './Authentication.data.js';
-import { IdsSchema, SkipTakeSchema } from './Base.data.js';
-import { UniqueSchema } from './Unique.data.js';
-export const AccountSchema = z.object({
-    authentication: AuthenticationSchema.optional(),
+import * as Authentication from './Authentication.data.js';
+import * as Base from './Base.data.js';
+import * as Unique from './Unique.data.js';
+export const Schema = z.object({
+    authentication: Authentication.Schema.optional(),
     email: z.string(),
     username: z.string(),
-    ...UniqueSchema.shape
+    ...Unique.Schema.shape
 }).strip();
-export const AccountIdSchema = z.object({
+export const IdSchema = z.object({
     accountId: z.string()
 });
-export const CreateAccountSchema = z.object({
+export const CreateSchema = z.object({
     email: z.string(),
     username: z.string(),
     password: z.string()
 });
-export const GetAccountsSchema = z.object({
+export const GetSchema = z.object({
     username: z.string().optional(),
-    ...IdsSchema.shape,
-    ...SkipTakeSchema.shape
+    ...Base.IdsSchema.shape,
+    ...Base.SkipTakeSchema.shape
 });
-export const UpdateAccountSchema = z.object({
+export const UpdateSchema = z.object({
     email: z.string().optional(),
     username: z.string().optional()
 });
