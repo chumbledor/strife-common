@@ -48,7 +48,7 @@ export type ObjectIdData = z.infer<typeof ObjectIdSchema>;
 export const ObjectSchema = z.object({
   type: z.enum(ObjectType),
   fileSystemId: z.string(),
-  parentFileSystemDirectoryId: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((parentId: string | mongoose.Types.ObjectId): string => parentId.toString()).optional(),
+  parentFileSystemDirectoryObjectId: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((parentFileSystemDirectoryObjectId: string | mongoose.Types.ObjectId): string => parentFileSystemDirectoryObjectId.toString()).optional(),
   name: z.string(),
   ...Schema.shape
 }).strip();
@@ -75,7 +75,7 @@ export type AnyObjectData = z.infer<typeof AnyObjectSchema>;
 
 export const CreateObjectSchema = z.object({
   type: z.enum(ObjectType),
-  parentFileSystemDirectoryId: z.string(),
+  parentFileSystemDirectoryObjectId: z.string(),
   name: z.string()
 });
 
@@ -98,7 +98,7 @@ export const AnyCreateObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [
 export type AnyCreateObjectData = z.infer<typeof AnyCreateObjectSchema>;
 
 export const GetObjectsSchema = z.object({
-  parentFileSystemDirectoryId: z.string().optional(),
+  parentFileSystemDirectoryObjectId: z.string().optional(),
   name: z.string().optional(),
   ...Base.IdsSchema.shape,
   ...Base.SkipTakeSchema.shape

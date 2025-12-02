@@ -36,7 +36,7 @@ export const ObjectIdSchema = z.object({
 export const ObjectSchema = z.object({
     type: z.enum(ObjectType),
     fileSystemId: z.string(),
-    parentFileSystemDirectoryId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((parentId) => parentId.toString()).optional(),
+    parentFileSystemDirectoryObjectId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((parentFileSystemDirectoryObjectId) => parentFileSystemDirectoryObjectId.toString()).optional(),
     name: z.string(),
     ...Schema.shape
 }).strip();
@@ -51,7 +51,7 @@ export const FileObjectSchema = ObjectSchema.extend({
 export const AnyObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [DirectoryObjectSchema, FileObjectSchema]);
 export const CreateObjectSchema = z.object({
     type: z.enum(ObjectType),
-    parentFileSystemDirectoryId: z.string(),
+    parentFileSystemDirectoryObjectId: z.string(),
     name: z.string()
 });
 export const CreateDirectoryObjectSchema = CreateObjectSchema.extend({
@@ -63,7 +63,7 @@ export const CreateFileObjectSchema = CreateObjectSchema.extend({
 });
 export const AnyCreateObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [CreateDirectoryObjectSchema, CreateFileObjectSchema]);
 export const GetObjectsSchema = z.object({
-    parentFileSystemDirectoryId: z.string().optional(),
+    parentFileSystemDirectoryObjectId: z.string().optional(),
     name: z.string().optional(),
     ...Base.IdsSchema.shape,
     ...Base.SkipTakeSchema.shape
