@@ -20,7 +20,7 @@ const MinimumSkipCount = 0;
 const MaximumTakeCount = 100;
 const CoerceStringToNumber = z.preprocess((value) => {
     if (!value)
-        return undefined;
+        return;
     const number = Number(value);
     return !Number.isNaN(number)
         ? number

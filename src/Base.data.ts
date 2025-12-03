@@ -35,7 +35,7 @@ const MaximumTakeCount = 100;
 const CoerceStringToNumber = z.preprocess(
   (value: string | number | undefined): number | undefined => {
     if (!value)
-      return undefined;
+      return;
 
     const number = Number(value);
     return !Number.isNaN(number)
