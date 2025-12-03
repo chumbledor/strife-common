@@ -1,12 +1,12 @@
 import z from 'zod';
 export declare const Schema: z.ZodObject<{
     id: z.ZodString;
-    createdAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
-    updatedAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
+    createdAt: z.ZodTransform<Date, string | Date>;
+    updatedAt: z.ZodTransform<Date, string | Date>;
     fileSystem: z.ZodObject<{
         id: z.ZodString;
-        createdAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
-        updatedAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
+        createdAt: z.ZodTransform<Date, string | Date>;
+        updatedAt: z.ZodTransform<Date, string | Date>;
         rootFileSystemDirectoryObjectId: z.ZodString;
     }, z.core.$strip>;
     name: z.ZodString;

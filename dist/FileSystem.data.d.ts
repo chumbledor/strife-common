@@ -19,8 +19,8 @@ export declare enum FileContentVersionType {
 }
 export declare const Schema: z.ZodObject<{
     id: z.ZodString;
-    createdAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
-    updatedAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
+    createdAt: z.ZodTransform<Date, string | Date>;
+    updatedAt: z.ZodTransform<Date, string | Date>;
     rootFileSystemDirectoryObjectId: z.ZodString;
 }, z.core.$strip>;
 export type Data = z.infer<typeof Schema>;
@@ -33,8 +33,8 @@ export declare const ObjectIdSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type ObjectIdData = z.infer<typeof ObjectIdSchema>;
 export declare const ObjectSchema: z.ZodObject<{
-    createdAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
-    updatedAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
+    createdAt: z.ZodTransform<Date, string | Date>;
+    updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
     type: z.ZodEnum<typeof ObjectType>;
     fileSystemId: z.ZodString;
@@ -43,8 +43,8 @@ export declare const ObjectSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type ObjectData = z.infer<typeof ObjectSchema>;
 export declare const DirectoryObjectSchema: z.ZodObject<{
-    createdAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
-    updatedAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
+    createdAt: z.ZodTransform<Date, string | Date>;
+    updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
     fileSystemId: z.ZodString;
     parentFileSystemDirectoryObjectId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
@@ -54,8 +54,8 @@ export declare const DirectoryObjectSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type DirectoryObjectData = z.infer<typeof DirectoryObjectSchema>;
 export declare const FileObjectSchema: z.ZodObject<{
-    createdAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
-    updatedAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
+    createdAt: z.ZodTransform<Date, string | Date>;
+    updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
     fileSystemId: z.ZodString;
     parentFileSystemDirectoryObjectId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
@@ -64,8 +64,8 @@ export declare const FileObjectSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type FileObjectData = z.infer<typeof FileObjectSchema>;
 export declare const AnyObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
-    createdAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
-    updatedAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
+    createdAt: z.ZodTransform<Date, string | Date>;
+    updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
     fileSystemId: z.ZodString;
     parentFileSystemDirectoryObjectId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
@@ -73,8 +73,8 @@ export declare const AnyObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
     type: z.ZodDefault<z.ZodLiteral<ObjectType.Directory>>;
     childrenFileSystemObjectIds: z.ZodArray<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
 }, z.core.$strip>, z.ZodObject<{
-    createdAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
-    updatedAt: z.ZodPipe<z.ZodTransform<Date, string | Date | undefined>, z.ZodDate>;
+    createdAt: z.ZodTransform<Date, string | Date>;
+    updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
     fileSystemId: z.ZodString;
     parentFileSystemDirectoryObjectId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;

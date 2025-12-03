@@ -1,19 +1,14 @@
 import z from 'zod';
 
-const now = new Date();
-
-const CoerceStringToDate = z.preprocess(
-  (value: string | Date | undefined): Date => {
+const CoerceStringToDate = z.transform(
+  (value: string | Date): Date => {
     switch (typeof value) {
       case 'string':
         return new Date(value);
       case 'object':
         return value;
-      case 'undefined':
-        return now;
     }
-  },
-  z.date()
+  }
 );
 
 export const Schema = z.object({
@@ -21,4 +16,5 @@ export const Schema = z.object({
   updatedAt: CoerceStringToDate
 });
 
+export type Input = z.input<typeof Schema>;
 export type Data = z.infer<typeof Schema>;
