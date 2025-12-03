@@ -24,7 +24,7 @@ export var FileContentVersionType;
     FileContentVersionType["Binary"] = "FileSystemFileBinaryContentVersion";
 })(FileContentVersionType || (FileContentVersionType = {}));
 export const Schema = z.object({
-    rootFileSystemDirectoryObjectId: z.string(),
+    rootFileSystemObjectId: z.string(),
     ...Base.Schema.shape,
     ...Unique.Schema.shape
 }).strip();
@@ -38,7 +38,7 @@ export const ObjectIdSchema = z.object({
 export const ObjectSchema = z.object({
     type: z.enum(ObjectType),
     fileSystemId: z.string(),
-    parentFileSystemDirectoryObjectId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((parentFileSystemDirectoryObjectId) => parentFileSystemDirectoryObjectId.toString()).optional(),
+    parentFileSystemObjectId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((parentFileSystemObjectId) => parentFileSystemObjectId.toString()).optional(),
     name: z.string(),
     ...Unique.Schema.shape,
     ...Timestamp.Schema.shape
@@ -53,7 +53,7 @@ export const FileObjectSchema = ObjectSchema.extend({
 export const AnyObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [DirectoryObjectSchema, FileObjectSchema]);
 export const CreateObjectSchema = z.object({
     type: z.enum(ObjectType),
-    parentFileSystemDirectoryObjectId: z.string(),
+    parentFileSystemObjectId: z.string(),
     name: z.string()
 });
 export const CreateDirectoryObjectSchema = CreateObjectSchema.extend({
@@ -64,7 +64,7 @@ export const CreateFileObjectSchema = CreateObjectSchema.extend({
 });
 export const AnyCreateObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [CreateDirectoryObjectSchema, CreateFileObjectSchema]);
 export const GetObjectsSchema = z.object({
-    parentFileSystemDirectoryObjectId: z.string().optional(),
+    parentFileSystemObjectId: z.string().optional(),
     name: z.string().optional(),
     ...Base.IdsSchema.shape,
     ...Base.SkipTakeSchema.shape
