@@ -3,7 +3,7 @@ export declare const Schema: z.ZodObject<{
     id: z.ZodString;
     fileSystem: z.ZodObject<{
         id: z.ZodString;
-        rootFileSystemObjectId: z.ZodString;
+        rootFileSystemDirectoryObjectId: z.ZodString;
     }, z.core.$strip>;
     name: z.ZodString;
     description: z.ZodOptional<z.ZodString>;

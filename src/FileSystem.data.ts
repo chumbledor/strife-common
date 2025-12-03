@@ -27,7 +27,7 @@ export enum FileContentVersionType {
 }
 
 export const Schema = z.object({
-  rootFileSystemObjectId: z.string(),
+  rootFileSystemDirectoryObjectId: z.string(),
   ...Unique.Schema.shape
 }).strip();;
 
@@ -63,8 +63,7 @@ export const DirectoryObjectSchema = ObjectSchema.extend({
 export type DirectoryObjectData = z.infer<typeof DirectoryObjectSchema>;
 
 export const FileObjectSchema = ObjectSchema.extend({
-  type: z.literal(ObjectType.File).default(ObjectType.File),
-  mimeType: z.string(),
+  type: z.literal(ObjectType.File).default(ObjectType.File)
 }).strip();
 
 export type FileObjectData = z.infer<typeof FileObjectSchema>;
@@ -88,8 +87,7 @@ export const CreateDirectoryObjectSchema = CreateObjectSchema.extend({
 export type CreateDirectoryObjectData = z.infer<typeof CreateDirectoryObjectSchema>;
 
 export const CreateFileObjectSchema = CreateObjectSchema.extend({
-  type: z.literal(ObjectType.File).default(ObjectType.File),
-  mimeType: z.string()
+  type: z.literal(ObjectType.File).default(ObjectType.File)
 });
 
 export type CreateFileObjectData = z.infer<typeof CreateFileObjectSchema>;
@@ -110,9 +108,7 @@ export const GetDirectoryObjectsSchema = GetObjectsSchema;
 
 export type GetDirectoryObjectsData = z.infer<typeof GetDirectoryObjectsSchema>;
 
-export const GetFileObjectsSchema = GetObjectsSchema.extend({
-  mimeType: z.string().optional()
-});
+export const GetFileObjectsSchema = GetObjectsSchema;
 
 export type GetFileObjectsData = z.infer<typeof GetFileObjectsSchema>;
 

@@ -23,7 +23,7 @@ export var FileContentVersionType;
     FileContentVersionType["Binary"] = "FileSystemFileBinaryContentVersion";
 })(FileContentVersionType || (FileContentVersionType = {}));
 export const Schema = z.object({
-    rootFileSystemObjectId: z.string(),
+    rootFileSystemDirectoryObjectId: z.string(),
     ...Unique.Schema.shape
 }).strip();
 ;
@@ -45,8 +45,7 @@ export const DirectoryObjectSchema = ObjectSchema.extend({
     childrenFileSystemObjectIds: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((childId) => childId.toString()).array()
 }).strip();
 export const FileObjectSchema = ObjectSchema.extend({
-    type: z.literal(ObjectType.File).default(ObjectType.File),
-    mimeType: z.string(),
+    type: z.literal(ObjectType.File).default(ObjectType.File)
 }).strip();
 export const AnyObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [DirectoryObjectSchema, FileObjectSchema]);
 export const CreateObjectSchema = z.object({
@@ -58,8 +57,7 @@ export const CreateDirectoryObjectSchema = CreateObjectSchema.extend({
     type: z.literal(ObjectType.Directory).default(ObjectType.Directory)
 });
 export const CreateFileObjectSchema = CreateObjectSchema.extend({
-    type: z.literal(ObjectType.File).default(ObjectType.File),
-    mimeType: z.string()
+    type: z.literal(ObjectType.File).default(ObjectType.File)
 });
 export const AnyCreateObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [CreateDirectoryObjectSchema, CreateFileObjectSchema]);
 export const GetObjectsSchema = z.object({
@@ -69,8 +67,6 @@ export const GetObjectsSchema = z.object({
     ...Base.SkipTakeSchema.shape
 });
 export const GetDirectoryObjectsSchema = GetObjectsSchema;
-export const GetFileObjectsSchema = GetObjectsSchema.extend({
-    mimeType: z.string().optional()
-});
+export const GetFileObjectsSchema = GetObjectsSchema;
 export const AnyGetObjectsSchema = z.union([GetDirectoryObjectsSchema, GetFileObjectsSchema]);
 //# sourceMappingURL=FileSystem.data.js.map
