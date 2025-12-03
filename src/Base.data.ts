@@ -1,4 +1,11 @@
 import z from 'zod';
+import * as Timestamp from './Timestamp.data.js';
+
+export const Schema = z.object({
+  ...Timestamp.Schema.shape
+});
+
+export type Data = z.infer<typeof Schema>;
 
 export const IdSchema = z.object({
   id: z.string()

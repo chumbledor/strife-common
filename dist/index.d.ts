@@ -7,4 +7,5 @@ export * as Base from './Base.data.js';
 export * as Event from './Event.js';
 export * as FileSystem from './FileSystem.data.js';
 export * as Project from './Project.data.js';
+export * as Timestamp from './Timestamp.data.js';
 export * as Unique from './Unique.data.js';

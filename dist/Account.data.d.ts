@@ -1,7 +1,11 @@
 import z from 'zod';
 export declare const Schema: z.ZodObject<{
     id: z.ZodString;
+    createdAt: z.ZodDate;
+    updatedAt: z.ZodDate;
     authentication: z.ZodOptional<z.ZodObject<{
+        createdAt: z.ZodDate;
+        updatedAt: z.ZodDate;
         accessToken: z.ZodOptional<z.ZodString>;
     }, z.core.$strip>>;
     email: z.ZodString;

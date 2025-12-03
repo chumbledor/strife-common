@@ -7,6 +7,7 @@ export const Schema = z.object({
   fileSystem: FileSystem.Schema,
   name: z.string(),
   description: z.string().optional(),
+  ...Base.Schema.shape,
   ...Unique.Schema.shape
 }).strip();
 

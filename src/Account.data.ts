@@ -7,6 +7,7 @@ export const Schema = z.object({
   authentication: Authentication.Schema.optional(),
   email: z.string(),
   username: z.string(),
+  ...Base.Schema.shape,
   ...Unique.Schema.shape
 }).strip();
 

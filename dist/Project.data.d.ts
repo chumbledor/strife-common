@@ -1,8 +1,12 @@
 import z from 'zod';
 export declare const Schema: z.ZodObject<{
     id: z.ZodString;
+    createdAt: z.ZodDate;
+    updatedAt: z.ZodDate;
     fileSystem: z.ZodObject<{
         id: z.ZodString;
+        createdAt: z.ZodDate;
+        updatedAt: z.ZodDate;
         rootFileSystemDirectoryObjectId: z.ZodString;
     }, z.core.$strip>;
     name: z.ZodString;

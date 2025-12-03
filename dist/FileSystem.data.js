@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import z from 'zod';
 import * as Base from './Base.data.js';
+import * as Timestamp from './Timestamp.data.js';
 import * as Unique from './Unique.data.js';
 export const ObjectDiscriminator = 'type';
 export var ObjectType;
@@ -24,6 +25,7 @@ export var FileContentVersionType;
 })(FileContentVersionType || (FileContentVersionType = {}));
 export const Schema = z.object({
     rootFileSystemDirectoryObjectId: z.string(),
+    ...Base.Schema.shape,
     ...Unique.Schema.shape
 }).strip();
 ;
@@ -38,7 +40,8 @@ export const ObjectSchema = z.object({
     fileSystemId: z.string(),
     parentFileSystemDirectoryObjectId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((parentFileSystemDirectoryObjectId) => parentFileSystemDirectoryObjectId.toString()).optional(),
     name: z.string(),
-    ...Schema.shape
+    ...Unique.Schema.shape,
+    ...Timestamp.Schema.shape
 }).strip();
 export const DirectoryObjectSchema = ObjectSchema.extend({
     type: z.literal(ObjectType.Directory).default(ObjectType.Directory),
