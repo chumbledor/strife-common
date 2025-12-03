@@ -24,7 +24,7 @@ export declare const FileObjectContentVersionSchema: z.ZodObject<{
     createdAt: z.ZodTransform<Date, string | Date>;
     updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
-    type: typeof FileObjectContentVersionType;
+    type: z.ZodEnum<typeof FileObjectContentVersionType>;
     fileSystemFileObjectContentId: z.ZodString;
 }, z.core.$strip>;
 export type FileObjectContentVersionData = z.infer<typeof FileObjectContentVersionSchema>;
@@ -62,7 +62,7 @@ export declare const FileObjectContentSchema: z.ZodObject<{
     createdAt: z.ZodTransform<Date, string | Date>;
     updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
-    type: typeof FileObjectContentType;
+    type: z.ZodEnum<typeof FileObjectContentType>;
     fileSystemObjectId: z.ZodString;
     mimeType: z.ZodString;
 }, z.core.$strip>;
@@ -130,7 +130,7 @@ export declare const AnyFileObjectContentSchema: z.ZodDiscriminatedUnion<[z.ZodO
 }, z.core.$strip>], "type">;
 export type AnyFileObjectContentData = z.infer<typeof AnyFileObjectContentSchema>;
 export declare const CreateFileObjectContentSchema: z.ZodObject<{
-    type: typeof FileObjectContentType;
+    type: z.ZodEnum<typeof FileObjectContentType>;
     mimeType: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type CreateFileObjectContentData = z.infer<typeof CreateFileObjectContentSchema>;

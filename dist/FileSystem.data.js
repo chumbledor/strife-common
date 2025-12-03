@@ -28,7 +28,7 @@ export var FileObjectContentVersionType;
     FileObjectContentVersionType["Binary"] = "FileObjectBinaryContentVersion";
 })(FileObjectContentVersionType || (FileObjectContentVersionType = {}));
 export const FileObjectContentVersionSchema = z.object({
-    type: FileObjectContentVersionType,
+    type: z.enum(FileObjectContentVersionType),
     fileSystemFileObjectContentId: z.string(),
     ...Unique.Schema.shape,
     ...Timestamp.Schema.shape
@@ -51,7 +51,7 @@ export var FileObjectContentType;
     FileObjectContentType["Binary"] = "FileObjectBinaryContent";
 })(FileObjectContentType || (FileObjectContentType = {}));
 export const FileObjectContentSchema = z.object({
-    type: FileObjectContentType,
+    type: z.enum(FileObjectContentType),
     fileSystemObjectId: z.string(),
     mimeType: z.string(),
     ...Unique.Schema.shape,
@@ -69,7 +69,7 @@ export const FileObjectBinaryContentSchema = FileObjectContentSchema.extend({
 }).strip();
 export const AnyFileObjectContentSchema = z.discriminatedUnion(FileObjectContentDiscriminator, [FileObjectTextContentSchema, FileObjectBinaryContentSchema]);
 export const CreateFileObjectContentSchema = z.object({
-    type: FileObjectContentType,
+    type: z.enum(FileObjectContentType),
     mimeType: z.string().optional()
 });
 export const CreateTextFileObjectContentSchema = CreateFileObjectContentSchema.extend({
@@ -104,7 +104,7 @@ export const FileObjectSchema = ObjectSchema.extend({
 }).strip();
 export const AnyObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [DirectoryObjectSchema, FileObjectSchema]);
 export const CreateObjectSchema = z.object({
-    type: z.enum(ObjectType), // TODO: Does this need to be a enum or can it just be ObjectType?
+    type: z.enum(ObjectType),
     parentFileSystemObjectId: z.string(),
     name: z.string()
 });
