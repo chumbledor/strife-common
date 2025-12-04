@@ -72,14 +72,14 @@ export const CreateFileObjectContentSchema = z.object({
     type: z.enum(FileObjectContentType),
     mimeType: z.string().optional()
 });
-export const CreateTextFileObjectContentSchema = CreateFileObjectContentSchema.extend({
+export const CreateFileObjectTextContentSchema = CreateFileObjectContentSchema.extend({
     type: z.literal(FileObjectContentType.Text).default(FileObjectContentType.Text),
     text: z.string().optional()
 });
-export const CreateBinaryFileObjectContentSchema = CreateFileObjectContentSchema.extend({
+export const CreateFileObjectBinaryContentSchema = CreateFileObjectContentSchema.extend({
     type: z.literal(FileObjectContentType.Binary).default(FileObjectContentType.Binary)
 });
-export const AnyCreateFileObjectContentSchema = z.discriminatedUnion(FileObjectContentDiscriminator, [CreateTextFileObjectContentSchema, CreateBinaryFileObjectContentSchema]);
+export const AnyCreateFileObjectContentSchema = z.discriminatedUnion(FileObjectContentDiscriminator, [CreateFileObjectTextContentSchema, CreateFileObjectBinaryContentSchema]);
 // #endregion
 // #region FileSystemObject
 export const ObjectDiscriminator = 'type';

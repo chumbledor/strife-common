@@ -105,20 +105,20 @@ export const CreateFileObjectContentSchema = z.object({
 
 export type CreateFileObjectContentData = z.infer<typeof CreateFileObjectContentSchema>;
 
-export const CreateTextFileObjectContentSchema = CreateFileObjectContentSchema.extend({
+export const CreateFileObjectTextContentSchema = CreateFileObjectContentSchema.extend({
   type: z.literal(FileObjectContentType.Text).default(FileObjectContentType.Text),
   text: z.string().optional()
 });
 
-export type CreateTextFileObjectContentData = z.infer<typeof CreateTextFileObjectContentSchema>;
+export type CreateFileObjectTextContentData = z.infer<typeof CreateFileObjectTextContentSchema>;
 
-export const CreateBinaryFileObjectContentSchema = CreateFileObjectContentSchema.extend({
+export const CreateFileObjectBinaryContentSchema = CreateFileObjectContentSchema.extend({
   type: z.literal(FileObjectContentType.Binary).default(FileObjectContentType.Binary)
 });
 
-export type CreateBinaryFileObjectContentData = z.infer<typeof CreateBinaryFileObjectContentSchema>;
+export type CreateFileObjectBinaryContentData = z.infer<typeof CreateFileObjectBinaryContentSchema>;
 
-export const AnyCreateFileObjectContentSchema = z.discriminatedUnion(FileObjectContentDiscriminator, [ CreateTextFileObjectContentSchema, CreateBinaryFileObjectContentSchema ]);
+export const AnyCreateFileObjectContentSchema = z.discriminatedUnion(FileObjectContentDiscriminator, [ CreateFileObjectTextContentSchema, CreateFileObjectBinaryContentSchema ]);
 export type AnyCreateFileObjectContentData = z.infer<typeof AnyCreateFileObjectContentSchema>;
 
 // #endregion

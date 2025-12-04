@@ -134,17 +134,17 @@ export declare const CreateFileObjectContentSchema: z.ZodObject<{
     mimeType: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type CreateFileObjectContentData = z.infer<typeof CreateFileObjectContentSchema>;
-export declare const CreateTextFileObjectContentSchema: z.ZodObject<{
+export declare const CreateFileObjectTextContentSchema: z.ZodObject<{
     mimeType: z.ZodOptional<z.ZodString>;
     type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
     text: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
-export type CreateTextFileObjectContentData = z.infer<typeof CreateTextFileObjectContentSchema>;
-export declare const CreateBinaryFileObjectContentSchema: z.ZodObject<{
+export type CreateFileObjectTextContentData = z.infer<typeof CreateFileObjectTextContentSchema>;
+export declare const CreateFileObjectBinaryContentSchema: z.ZodObject<{
     mimeType: z.ZodOptional<z.ZodString>;
     type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
 }, z.core.$strip>;
-export type CreateBinaryFileObjectContentData = z.infer<typeof CreateBinaryFileObjectContentSchema>;
+export type CreateFileObjectBinaryContentData = z.infer<typeof CreateFileObjectBinaryContentSchema>;
 export declare const AnyCreateFileObjectContentSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
     mimeType: z.ZodOptional<z.ZodString>;
     type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
