@@ -154,6 +154,31 @@ export declare const AnyCreateFileObjectContentSchema: z.ZodDiscriminatedUnion<[
     type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
 }, z.core.$strip>], "type">;
 export type AnyCreateFileObjectContentData = z.infer<typeof AnyCreateFileObjectContentSchema>;
+export declare const UpdateFileObjectContentSchema: z.ZodObject<{
+    type: z.ZodEnum<typeof FileObjectContentType>;
+    mimeType: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
+export type UpdateFileObjectContentData = z.infer<typeof UpdateFileObjectContentSchema>;
+export declare const UpdateFileObjectTextContentSchema: z.ZodObject<{
+    mimeType: z.ZodOptional<z.ZodString>;
+    type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
+    text: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
+export type UpdateFileObjectTextContentData = z.infer<typeof UpdateFileObjectTextContentSchema>;
+export declare const UpdateFileObjectBinaryContentSchema: z.ZodObject<{
+    mimeType: z.ZodOptional<z.ZodString>;
+    type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
+}, z.core.$strip>;
+export type UpdateFileObjectBinaryContentData = z.infer<typeof UpdateFileObjectBinaryContentSchema>;
+export declare const AnyUpdateFileObjectContentSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
+    mimeType: z.ZodOptional<z.ZodString>;
+    type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
+    text: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>, z.ZodObject<{
+    mimeType: z.ZodOptional<z.ZodString>;
+    type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
+}, z.core.$strip>], "type">;
+export type AnyUpdateFileObjectContentData = z.infer<typeof AnyUpdateFileObjectContentSchema>;
 export declare const ObjectDiscriminator = "type";
 export type IdData = z.infer<typeof IdSchema>;
 export declare const ObjectIdSchema: z.ZodObject<{
@@ -284,14 +309,14 @@ export declare const CreateFileObjectSchema: z.ZodObject<{
     parentFileSystemObjectId: z.ZodString;
     name: z.ZodString;
     type: z.ZodDefault<z.ZodLiteral<ObjectType.File>>;
-    createFileObjectContent: z.ZodDiscriminatedUnion<[z.ZodObject<{
+    createFileObjectContent: z.ZodOptional<z.ZodDiscriminatedUnion<[z.ZodObject<{
         mimeType: z.ZodOptional<z.ZodString>;
         type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
         text: z.ZodOptional<z.ZodString>;
     }, z.core.$strip>, z.ZodObject<{
         mimeType: z.ZodOptional<z.ZodString>;
         type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
-    }, z.core.$strip>], "type">;
+    }, z.core.$strip>], "type">>;
 }, z.core.$strip>;
 export type CreateFileObjectData = z.infer<typeof CreateFileObjectSchema>;
 export declare const AnyCreateObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
@@ -302,14 +327,14 @@ export declare const AnyCreateObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject
     parentFileSystemObjectId: z.ZodString;
     name: z.ZodString;
     type: z.ZodDefault<z.ZodLiteral<ObjectType.File>>;
-    createFileObjectContent: z.ZodDiscriminatedUnion<[z.ZodObject<{
+    createFileObjectContent: z.ZodOptional<z.ZodDiscriminatedUnion<[z.ZodObject<{
         mimeType: z.ZodOptional<z.ZodString>;
         type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
         text: z.ZodOptional<z.ZodString>;
     }, z.core.$strip>, z.ZodObject<{
         mimeType: z.ZodOptional<z.ZodString>;
         type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
-    }, z.core.$strip>], "type">;
+    }, z.core.$strip>], "type">>;
 }, z.core.$strip>], "type">;
 export type AnyCreateObjectData = z.infer<typeof AnyCreateObjectSchema>;
 export declare const GetObjectsSchema: z.ZodObject<{
@@ -350,3 +375,47 @@ export declare const AnyGetObjectsSchema: z.ZodUnion<readonly [z.ZodObject<{
     name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>]>;
 export type AnyGetObjectsData = z.infer<typeof AnyGetObjectsSchema>;
+export declare const UpdateObjectSchema: z.ZodObject<{
+    type: z.ZodEnum<typeof ObjectType>;
+    parentFileSystemObjectId: z.ZodOptional<z.ZodString>;
+    name: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
+export type UpdateObjectData = z.infer<typeof UpdateObjectSchema>;
+export declare const UpdateDirectoryObjectSchema: z.ZodObject<{
+    parentFileSystemObjectId: z.ZodOptional<z.ZodString>;
+    name: z.ZodOptional<z.ZodString>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.Directory>>;
+}, z.core.$strip>;
+export type UpdateDirectoryObjectData = z.infer<typeof UpdateDirectoryObjectSchema>;
+export declare const UpdateFileObjectSchema: z.ZodObject<{
+    parentFileSystemObjectId: z.ZodOptional<z.ZodString>;
+    name: z.ZodOptional<z.ZodString>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.File>>;
+    updateFileObjectContent: z.ZodOptional<z.ZodDiscriminatedUnion<[z.ZodObject<{
+        mimeType: z.ZodOptional<z.ZodString>;
+        type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
+        text: z.ZodOptional<z.ZodString>;
+    }, z.core.$strip>, z.ZodObject<{
+        mimeType: z.ZodOptional<z.ZodString>;
+        type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
+    }, z.core.$strip>], "type">>;
+}, z.core.$strip>;
+export type UpdateFileObjectData = z.infer<typeof UpdateFileObjectSchema>;
+export declare const AnyUpdateObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
+    parentFileSystemObjectId: z.ZodOptional<z.ZodString>;
+    name: z.ZodOptional<z.ZodString>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.Directory>>;
+}, z.core.$strip>, z.ZodObject<{
+    parentFileSystemObjectId: z.ZodOptional<z.ZodString>;
+    name: z.ZodOptional<z.ZodString>;
+    type: z.ZodDefault<z.ZodLiteral<ObjectType.File>>;
+    updateFileObjectContent: z.ZodOptional<z.ZodDiscriminatedUnion<[z.ZodObject<{
+        mimeType: z.ZodOptional<z.ZodString>;
+        type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
+        text: z.ZodOptional<z.ZodString>;
+    }, z.core.$strip>, z.ZodObject<{
+        mimeType: z.ZodOptional<z.ZodString>;
+        type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
+    }, z.core.$strip>], "type">>;
+}, z.core.$strip>], "type">;
+export type AnyUpdateObjectData = z.infer<typeof AnyUpdateObjectSchema>;

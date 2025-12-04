@@ -121,6 +121,29 @@ export type CreateFileObjectBinaryContentData = z.infer<typeof CreateFileObjectB
 export const AnyCreateFileObjectContentSchema = z.discriminatedUnion(FileObjectContentDiscriminator, [ CreateFileObjectTextContentSchema, CreateFileObjectBinaryContentSchema ]);
 export type AnyCreateFileObjectContentData = z.infer<typeof AnyCreateFileObjectContentSchema>;
 
+export const UpdateFileObjectContentSchema = z.object({
+  type: z.enum(FileObjectContentType),
+  mimeType: z.string().optional()
+});
+
+export type UpdateFileObjectContentData = z.infer<typeof UpdateFileObjectContentSchema>;
+
+export const UpdateFileObjectTextContentSchema = UpdateFileObjectContentSchema.extend({
+  type: z.literal(FileObjectContentType.Text).default(FileObjectContentType.Text),
+  text: z.string().optional()
+});
+
+export type UpdateFileObjectTextContentData = z.infer<typeof UpdateFileObjectTextContentSchema>;
+
+export const UpdateFileObjectBinaryContentSchema = UpdateFileObjectContentSchema.extend({
+  type: z.literal(FileObjectContentType.Binary).default(FileObjectContentType.Binary)
+});
+
+export type UpdateFileObjectBinaryContentData = z.infer<typeof UpdateFileObjectBinaryContentSchema>;
+
+export const AnyUpdateFileObjectContentSchema = z.discriminatedUnion(FileObjectContentDiscriminator, [ UpdateFileObjectTextContentSchema, UpdateFileObjectBinaryContentSchema ]);
+export type AnyUpdateFileObjectContentData = z.infer<typeof AnyUpdateFileObjectContentSchema>;
+
 // #endregion
 
 // #region FileSystemObject
@@ -179,7 +202,7 @@ export type CreateDirectoryObjectData = z.infer<typeof CreateDirectoryObjectSche
 
 export const CreateFileObjectSchema = CreateObjectSchema.extend({
   type: z.literal(ObjectType.File).default(ObjectType.File),
-  createFileObjectContent: AnyCreateFileObjectContentSchema
+  createFileObjectContent: AnyCreateFileObjectContentSchema.optional()
 });
 
 export type CreateFileObjectData = z.infer<typeof CreateFileObjectSchema>;
@@ -204,5 +227,29 @@ export type GetFileObjectsData = z.infer<typeof GetFileObjectsSchema>;
 
 export const AnyGetObjectsSchema = z.union([ GetDirectoryObjectsSchema, GetFileObjectsSchema ]);
 export type AnyGetObjectsData = z.infer<typeof AnyGetObjectsSchema>;
+
+export const UpdateObjectSchema = z.object({
+  type: z.enum(ObjectType),
+  parentFileSystemObjectId: z.string().optional(),
+  name: z.string().optional()
+});
+
+export type UpdateObjectData = z.infer<typeof UpdateObjectSchema>;
+
+export const UpdateDirectoryObjectSchema = UpdateObjectSchema.extend({
+  type: z.literal(ObjectType.Directory).default(ObjectType.Directory)
+});
+
+export type UpdateDirectoryObjectData = z.infer<typeof UpdateDirectoryObjectSchema>;
+
+export const UpdateFileObjectSchema = UpdateObjectSchema.extend({
+  type: z.literal(ObjectType.File).default(ObjectType.File),
+  updateFileObjectContent: AnyUpdateFileObjectContentSchema.optional()
+});
+
+export type UpdateFileObjectData = z.infer<typeof UpdateFileObjectSchema>;
+
+export const AnyUpdateObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [ UpdateDirectoryObjectSchema, UpdateFileObjectSchema ]);
+export type AnyUpdateObjectData = z.infer<typeof AnyUpdateObjectSchema>;
 
 // #endregion

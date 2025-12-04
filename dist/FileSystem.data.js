@@ -80,6 +80,18 @@ export const CreateFileObjectBinaryContentSchema = CreateFileObjectContentSchema
     type: z.literal(FileObjectContentType.Binary).default(FileObjectContentType.Binary)
 });
 export const AnyCreateFileObjectContentSchema = z.discriminatedUnion(FileObjectContentDiscriminator, [CreateFileObjectTextContentSchema, CreateFileObjectBinaryContentSchema]);
+export const UpdateFileObjectContentSchema = z.object({
+    type: z.enum(FileObjectContentType),
+    mimeType: z.string().optional()
+});
+export const UpdateFileObjectTextContentSchema = UpdateFileObjectContentSchema.extend({
+    type: z.literal(FileObjectContentType.Text).default(FileObjectContentType.Text),
+    text: z.string().optional()
+});
+export const UpdateFileObjectBinaryContentSchema = UpdateFileObjectContentSchema.extend({
+    type: z.literal(FileObjectContentType.Binary).default(FileObjectContentType.Binary)
+});
+export const AnyUpdateFileObjectContentSchema = z.discriminatedUnion(FileObjectContentDiscriminator, [UpdateFileObjectTextContentSchema, UpdateFileObjectBinaryContentSchema]);
 // #endregion
 // #region FileSystemObject
 export const ObjectDiscriminator = 'type';
@@ -113,7 +125,7 @@ export const CreateDirectoryObjectSchema = CreateObjectSchema.extend({
 });
 export const CreateFileObjectSchema = CreateObjectSchema.extend({
     type: z.literal(ObjectType.File).default(ObjectType.File),
-    createFileObjectContent: AnyCreateFileObjectContentSchema
+    createFileObjectContent: AnyCreateFileObjectContentSchema.optional()
 });
 export const AnyCreateObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [CreateDirectoryObjectSchema, CreateFileObjectSchema]);
 export const GetObjectsSchema = z.object({
@@ -125,5 +137,18 @@ export const GetObjectsSchema = z.object({
 export const GetDirectoryObjectsSchema = GetObjectsSchema;
 export const GetFileObjectsSchema = GetObjectsSchema;
 export const AnyGetObjectsSchema = z.union([GetDirectoryObjectsSchema, GetFileObjectsSchema]);
+export const UpdateObjectSchema = z.object({
+    type: z.enum(ObjectType),
+    parentFileSystemObjectId: z.string().optional(),
+    name: z.string().optional()
+});
+export const UpdateDirectoryObjectSchema = UpdateObjectSchema.extend({
+    type: z.literal(ObjectType.Directory).default(ObjectType.Directory)
+});
+export const UpdateFileObjectSchema = UpdateObjectSchema.extend({
+    type: z.literal(ObjectType.File).default(ObjectType.File),
+    updateFileObjectContent: AnyUpdateFileObjectContentSchema.optional()
+});
+export const AnyUpdateObjectSchema = z.discriminatedUnion(ObjectDiscriminator, [UpdateDirectoryObjectSchema, UpdateFileObjectSchema]);
 // #endregion
 //# sourceMappingURL=FileSystem.data.js.map
