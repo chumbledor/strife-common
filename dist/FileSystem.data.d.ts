@@ -25,14 +25,14 @@ export declare const FileObjectContentVersionSchema: z.ZodObject<{
     updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
     type: z.ZodEnum<typeof FileObjectContentVersionType>;
-    fileSystemFileObjectContentId: z.ZodString;
+    fileSystemFileObjectContentId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
 }, z.core.$strip>;
 export type FileObjectContentVersionData = z.infer<typeof FileObjectContentVersionSchema>;
 export declare const FileObjectBinaryContentVersionSchema: z.ZodObject<{
     createdAt: z.ZodTransform<Date, string | Date>;
     updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
-    fileSystemFileObjectContentId: z.ZodString;
+    fileSystemFileObjectContentId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
     type: z.ZodDefault<z.ZodLiteral<FileObjectContentVersionType.Binary>>;
     bucket: z.ZodString;
     key: z.ZodString;
@@ -44,7 +44,7 @@ export declare const AnyFileObjectContentVersionSchema: z.ZodDiscriminatedUnion<
     createdAt: z.ZodTransform<Date, string | Date>;
     updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
-    fileSystemFileObjectContentId: z.ZodString;
+    fileSystemFileObjectContentId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
     type: z.ZodDefault<z.ZodLiteral<FileObjectContentVersionType.Binary>>;
     bucket: z.ZodString;
     key: z.ZodString;
@@ -63,7 +63,7 @@ export declare const FileObjectContentSchema: z.ZodObject<{
     updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
     type: z.ZodEnum<typeof FileObjectContentType>;
-    fileSystemObjectId: z.ZodString;
+    fileSystemObjectId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
     mimeType: z.ZodString;
 }, z.core.$strip>;
 export type FileObjectContentData = z.infer<typeof FileObjectContentSchema>;
@@ -71,7 +71,7 @@ export declare const FileObjectTextContentSchema: z.ZodObject<{
     createdAt: z.ZodTransform<Date, string | Date>;
     updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
-    fileSystemObjectId: z.ZodString;
+    fileSystemObjectId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
     mimeType: z.ZodString;
     type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
     text: z.ZodOptional<z.ZodString>;
@@ -81,16 +81,16 @@ export declare const FileObjectBinaryContentSchema: z.ZodObject<{
     createdAt: z.ZodTransform<Date, string | Date>;
     updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
-    fileSystemObjectId: z.ZodString;
+    fileSystemObjectId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
     mimeType: z.ZodString;
     type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
-    currentFileSystemFileObjectContentVersionId: z.ZodString;
-    fileSystemFileObjectContentVersionIds: z.ZodArray<z.ZodString>;
+    currentFileSystemFileObjectContentVersionId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
+    fileSystemFileObjectContentVersionIds: z.ZodArray<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     currentFileSystemFileObjectContentVersion: z.ZodObject<{
         createdAt: z.ZodTransform<Date, string | Date>;
         updatedAt: z.ZodTransform<Date, string | Date>;
         id: z.ZodString;
-        fileSystemFileObjectContentId: z.ZodString;
+        fileSystemFileObjectContentId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
         type: z.ZodDefault<z.ZodLiteral<FileObjectContentVersionType.Binary>>;
         bucket: z.ZodString;
         key: z.ZodString;
@@ -103,7 +103,7 @@ export declare const AnyFileObjectContentSchema: z.ZodDiscriminatedUnion<[z.ZodO
     createdAt: z.ZodTransform<Date, string | Date>;
     updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
-    fileSystemObjectId: z.ZodString;
+    fileSystemObjectId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
     mimeType: z.ZodString;
     type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
     text: z.ZodOptional<z.ZodString>;
@@ -111,16 +111,16 @@ export declare const AnyFileObjectContentSchema: z.ZodDiscriminatedUnion<[z.ZodO
     createdAt: z.ZodTransform<Date, string | Date>;
     updatedAt: z.ZodTransform<Date, string | Date>;
     id: z.ZodString;
-    fileSystemObjectId: z.ZodString;
+    fileSystemObjectId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
     mimeType: z.ZodString;
     type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
-    currentFileSystemFileObjectContentVersionId: z.ZodString;
-    fileSystemFileObjectContentVersionIds: z.ZodArray<z.ZodString>;
+    currentFileSystemFileObjectContentVersionId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
+    fileSystemFileObjectContentVersionIds: z.ZodArray<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
     currentFileSystemFileObjectContentVersion: z.ZodObject<{
         createdAt: z.ZodTransform<Date, string | Date>;
         updatedAt: z.ZodTransform<Date, string | Date>;
         id: z.ZodString;
-        fileSystemFileObjectContentId: z.ZodString;
+        fileSystemFileObjectContentId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
         type: z.ZodDefault<z.ZodLiteral<FileObjectContentVersionType.Binary>>;
         bucket: z.ZodString;
         key: z.ZodString;
@@ -193,7 +193,7 @@ export declare const FileObjectSchema: z.ZodObject<{
         createdAt: z.ZodTransform<Date, string | Date>;
         updatedAt: z.ZodTransform<Date, string | Date>;
         id: z.ZodString;
-        fileSystemObjectId: z.ZodString;
+        fileSystemObjectId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
         mimeType: z.ZodString;
         type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
         text: z.ZodOptional<z.ZodString>;
@@ -201,16 +201,16 @@ export declare const FileObjectSchema: z.ZodObject<{
         createdAt: z.ZodTransform<Date, string | Date>;
         updatedAt: z.ZodTransform<Date, string | Date>;
         id: z.ZodString;
-        fileSystemObjectId: z.ZodString;
+        fileSystemObjectId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
         mimeType: z.ZodString;
         type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
-        currentFileSystemFileObjectContentVersionId: z.ZodString;
-        fileSystemFileObjectContentVersionIds: z.ZodArray<z.ZodString>;
+        currentFileSystemFileObjectContentVersionId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
+        fileSystemFileObjectContentVersionIds: z.ZodArray<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
         currentFileSystemFileObjectContentVersion: z.ZodObject<{
             createdAt: z.ZodTransform<Date, string | Date>;
             updatedAt: z.ZodTransform<Date, string | Date>;
             id: z.ZodString;
-            fileSystemFileObjectContentId: z.ZodString;
+            fileSystemFileObjectContentId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
             type: z.ZodDefault<z.ZodLiteral<FileObjectContentVersionType.Binary>>;
             bucket: z.ZodString;
             key: z.ZodString;
@@ -241,7 +241,7 @@ export declare const AnyObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
         createdAt: z.ZodTransform<Date, string | Date>;
         updatedAt: z.ZodTransform<Date, string | Date>;
         id: z.ZodString;
-        fileSystemObjectId: z.ZodString;
+        fileSystemObjectId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
         mimeType: z.ZodString;
         type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Text>>;
         text: z.ZodOptional<z.ZodString>;
@@ -249,16 +249,16 @@ export declare const AnyObjectSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
         createdAt: z.ZodTransform<Date, string | Date>;
         updatedAt: z.ZodTransform<Date, string | Date>;
         id: z.ZodString;
-        fileSystemObjectId: z.ZodString;
+        fileSystemObjectId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
         mimeType: z.ZodString;
         type: z.ZodDefault<z.ZodLiteral<FileObjectContentType.Binary>>;
-        currentFileSystemFileObjectContentVersionId: z.ZodString;
-        fileSystemFileObjectContentVersionIds: z.ZodArray<z.ZodString>;
+        currentFileSystemFileObjectContentVersionId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
+        fileSystemFileObjectContentVersionIds: z.ZodArray<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>>;
         currentFileSystemFileObjectContentVersion: z.ZodObject<{
             createdAt: z.ZodTransform<Date, string | Date>;
             updatedAt: z.ZodTransform<Date, string | Date>;
             id: z.ZodString;
-            fileSystemFileObjectContentId: z.ZodString;
+            fileSystemFileObjectContentId: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodCustom<mongoose.Types.ObjectId, mongoose.Types.ObjectId>]>, z.ZodTransform<string, string | mongoose.Types.ObjectId>>;
             type: z.ZodDefault<z.ZodLiteral<FileObjectContentVersionType.Binary>>;
             bucket: z.ZodString;
             key: z.ZodString;

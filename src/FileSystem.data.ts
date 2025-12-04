@@ -37,7 +37,7 @@ export enum FileObjectContentVersionType {
 
 export const FileObjectContentVersionSchema = z.object({
   type: z.enum(FileObjectContentVersionType),
-  fileSystemFileObjectContentId: z.string(),
+  fileSystemFileObjectContentId:  z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((fileSystemFileObjectContentId: string | mongoose.Types.ObjectId): string => fileSystemFileObjectContentId.toString()),
   ...Unique.Schema.shape,
   ...Timestamp.Schema.shape
 }).strip();
@@ -71,7 +71,7 @@ export enum FileObjectContentType {
 
 export const FileObjectContentSchema = z.object({
   type: z.enum(FileObjectContentType),
-  fileSystemObjectId: z.string(),
+  fileSystemObjectId: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((fileSystemObjectId: string | mongoose.Types.ObjectId): string => fileSystemObjectId.toString()),
   mimeType: z.string(),
   ...Unique.Schema.shape,
   ...Timestamp.Schema.shape
@@ -88,8 +88,8 @@ export type FileObjectTextContentData = z.infer<typeof FileObjectTextContentSche
 
 export const FileObjectBinaryContentSchema = FileObjectContentSchema.extend({
   type: z.literal(FileObjectContentType.Binary).default(FileObjectContentType.Binary),
-  currentFileSystemFileObjectContentVersionId: z.string(),
-  fileSystemFileObjectContentVersionIds: z.string().array(),
+  currentFileSystemFileObjectContentVersionId: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((currentFileSystemFileObjectContentVersionId: string | mongoose.Types.ObjectId): string => currentFileSystemFileObjectContentVersionId.toString()),
+  fileSystemFileObjectContentVersionIds:z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((fileSystemFileObjectContentVersionId: string | mongoose.Types.ObjectId): string => fileSystemFileObjectContentVersionId.toString()).array(),
   currentFileSystemFileObjectContentVersion: FileObjectBinaryContentVersionSchema
 }).strip();
 
@@ -148,7 +148,7 @@ export type ObjectData = z.infer<typeof ObjectSchema>;
 
 export const DirectoryObjectSchema = ObjectSchema.extend({
   type: z.literal(ObjectType.Directory).default(ObjectType.Directory),
-  childrenFileSystemObjectIds: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((childId: string | mongoose.Types.ObjectId): string => childId.toString()).array()
+  childrenFileSystemObjectIds: z.union([ z.string(), z.instanceof(mongoose.Types.ObjectId) ]).transform((childFileSystemObjectId: string | mongoose.Types.ObjectId): string => childFileSystemObjectId.toString()).array()
 }).strip();
 
 export type DirectoryObjectData = z.infer<typeof DirectoryObjectSchema>;

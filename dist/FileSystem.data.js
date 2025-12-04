@@ -29,7 +29,7 @@ export var FileObjectContentVersionType;
 })(FileObjectContentVersionType || (FileObjectContentVersionType = {}));
 export const FileObjectContentVersionSchema = z.object({
     type: z.enum(FileObjectContentVersionType),
-    fileSystemFileObjectContentId: z.string(),
+    fileSystemFileObjectContentId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((fileSystemFileObjectContentId) => fileSystemFileObjectContentId.toString()),
     ...Unique.Schema.shape,
     ...Timestamp.Schema.shape
 }).strip();
@@ -52,7 +52,7 @@ export var FileObjectContentType;
 })(FileObjectContentType || (FileObjectContentType = {}));
 export const FileObjectContentSchema = z.object({
     type: z.enum(FileObjectContentType),
-    fileSystemObjectId: z.string(),
+    fileSystemObjectId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((fileSystemObjectId) => fileSystemObjectId.toString()),
     mimeType: z.string(),
     ...Unique.Schema.shape,
     ...Timestamp.Schema.shape
@@ -63,8 +63,8 @@ export const FileObjectTextContentSchema = FileObjectContentSchema.extend({
 }).strip();
 export const FileObjectBinaryContentSchema = FileObjectContentSchema.extend({
     type: z.literal(FileObjectContentType.Binary).default(FileObjectContentType.Binary),
-    currentFileSystemFileObjectContentVersionId: z.string(),
-    fileSystemFileObjectContentVersionIds: z.string().array(),
+    currentFileSystemFileObjectContentVersionId: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((currentFileSystemFileObjectContentVersionId) => currentFileSystemFileObjectContentVersionId.toString()),
+    fileSystemFileObjectContentVersionIds: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((fileSystemFileObjectContentVersionId) => fileSystemFileObjectContentVersionId.toString()).array(),
     currentFileSystemFileObjectContentVersion: FileObjectBinaryContentVersionSchema
 }).strip();
 export const AnyFileObjectContentSchema = z.discriminatedUnion(FileObjectContentDiscriminator, [FileObjectTextContentSchema, FileObjectBinaryContentSchema]);
@@ -96,7 +96,7 @@ export const ObjectSchema = z.object({
 }).strip();
 export const DirectoryObjectSchema = ObjectSchema.extend({
     type: z.literal(ObjectType.Directory).default(ObjectType.Directory),
-    childrenFileSystemObjectIds: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((childId) => childId.toString()).array()
+    childrenFileSystemObjectIds: z.union([z.string(), z.instanceof(mongoose.Types.ObjectId)]).transform((childFileSystemObjectId) => childFileSystemObjectId.toString()).array()
 }).strip();
 export const FileObjectSchema = ObjectSchema.extend({
     type: z.literal(ObjectType.File).default(ObjectType.File),
